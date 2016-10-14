@@ -1,0 +1,110 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="我回来了！"><title>开始Hexo博客之旅 | SunQiang's Blog</title><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/normalize/4.2.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.0/grids-responsive-min.css"><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.bootcss.com/jquery/3.0.0/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">开始Hexo博客之旅</h1><a id="logo" href="/.">SunQiang's Blog</a><p class="description">我爱学习，学习爱我</p></div><div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> 首页</i></a><a href="/diary/"><i class="fa fa-book"> 心情</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/guestbook/"><i class="fa fa-comments"> 留言</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div></div><div id="layout" class="pure-g"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">开始Hexo博客之旅</h1><div class="post-meta">Apr 17, 2016<span> | </span><span class="category"><a href="/categories/编程技术/">编程技术</a></span><script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> Hits</span></span></div><a data-disqus-identifier="2016/04/17/20160417_开始Hexo博客之旅/" href="/2016/04/17/20160417_开始Hexo博客之旅/#disqus_thread" class="disqus-comment-count"></a><div class="clear"><div id="toc" class="toc-article"><div class="toc-title">文章目录</div><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装Hexo与配置"><span class="toc-number">1.</span> <span class="toc-text">安装Hexo与配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#为博客更换主题"><span class="toc-number">2.</span> <span class="toc-text">为博客更换主题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#关于front-matter"><span class="toc-number">3.</span> <span class="toc-text">关于front-matter</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#给博客添加域名"><span class="toc-number">4.</span> <span class="toc-text">给博客添加域名</span></a></li></ol></div></div><div class="post-content"><p>想建一个自己的博客很久了，然而拖延症晚期。。。你懂的。经历了浑浑噩噩的大学四年，浑浑噩噩的一年多工作之后，终于决定改变些什么。于是辞去了天津的那份没有前途的工作，来到北京，加入北漂一族。也想如此给自己一些压力，一些动力。就用这个博客，记录我的一些足迹吧，希望自己日后不再是低级一个码农。</p>
+<p>搭建的过程中在网上看了很多很多博客，在这里就不一一列举了。然后自己汇总了一下，就贴在这里，作为第一篇博文吧。</p>
+<h2 id="安装Hexo与配置"><a href="#安装Hexo与配置" class="headerlink" title="安装Hexo与配置"></a>安装Hexo与配置</h2><p>1.前期准备工作</p>
+<p>安装node.js的环境，包括nvm的安装、node.js具体版本的安装<br>PS:Mac下通过homebrew神器安装nvm，再nvm install node.js的某版本即可</p>
+<p>2.安装hexo</p>
+<p>使用淘宝镜像，编辑 ~/.npmrc 加入下面内容（没有则新建）<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">registry = <span class="string">https:</span><span class="comment">//registry.npm.taobao.org</span></div></pre></td></tr></table></figure></p>
+<p>然后安装：<br><figure class="highlight avrasm"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install -g hexo-<span class="keyword">cli</span></div></pre></td></tr></table></figure></p>
+<p>3.创建hexo文件夹</p>
+<p>先cd到为hexo准备的文件夹，然后执行：<br><figure class="highlight cmake"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">hexo init</div><div class="line">npm <span class="keyword">install</span></div></pre></td></tr></table></figure></p>
+<p>4.准备github</p>
+<p>在github上创建名为yourname.github.io的repository，这里yourname一定要换成你自己的github的username</p>
+<p>5.配置hexo</p>
+<p>修改hexo目录下的_config.yml文件的末尾：<br><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">deploy</span>:</div><div class="line">  <span class="attribute">type</span>: git</div><div class="line">  <span class="attribute">repository</span>: git<span class="variable">@github</span>.<span class="attribute">com</span>:yourname/yourname.github.io.git</div><div class="line">  <span class="attribute">branch</span>: master</div></pre></td></tr></table></figure></p>
+<p>同理，yourname换成你的github的username</p>
+<p>6.安装git部署工具</p>
+<p>在hexo的目录下执行命令：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm <span class="keyword">install</span> hexo-deployer-git <span class="comment">--save</span></div></pre></td></tr></table></figure></p>
+<p>7.执行部署</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">hexo g</span></div><div class="line">hexo d</div></pre></td></tr></table></figure>
+<p>至此博客搭建完成，浏览器输入yourname.github.io即可看到个人博客的内容</p>
+<h2 id="为博客更换主题"><a href="#为博客更换主题" class="headerlink" title="为博客更换主题"></a>为博客更换主题</h2><p>如果觉得默认主题不太符合个人审美，可以选择自己喜欢的主题更换。主题的选择可以参考知乎：<a href="https://www.zhihu.com/question/24422335" target="_blank" rel="external">有哪些好看的 Hexo 主题？</a>这里以主题<a href="https://github.com/tufu9441/maupassant-hexo" target="_blank" rel="external">maupassant</a>为例。</p>
+<p>1.fork主题，便于日后修改与保存</p>
+<p>2.git clone此主题到hexo目录下的themes目录（通过github desktop客户端，方便一些）</p>
+<p><strong>注意！clone下的主题名字是maupassant-hexo，需要去掉尾部的-hexo</strong></p>
+<p>3.安装此主题需要的插件包</p>
+<p>在hexo目录下执行：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">npm <span class="keyword">install</span> hexo-renderer-jade <span class="comment">--save</span></div><div class="line">npm <span class="keyword">install</span> hexo-renderer-sass <span class="comment">--save</span></div></pre></td></tr></table></figure></p>
+<p>2016.05.18 update pinyin:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm <span class="keyword">install</span> pinyin <span class="comment">--save</span></div></pre></td></tr></table></figure>
+<p>4.编辑Hexo目录下的 _config.yml，将theme的值改为maupassant</p>
+<p>5.设置网站的Favicon：</p>
+<p>将自己喜欢的图片重命名为favicon.ico放在Hexo根目录的source文件夹下，建议的大小：32px*32px</p>
+<p>6.添加[关于]界面：</p>
+<p>在博客source目录下建立一个包含index.md的about文件夹，编辑该md文件内容</p>
+<p>7.添加rss订阅功能</p>
+<p>在hexo根目录下安装feed生成插件：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm <span class="keyword">install</span> hexo-generator-feed <span class="comment">--save</span></div></pre></td></tr></table></figure></p>
+<p>而后将此插件配置到hexo的_config.yml<br><figure class="highlight dts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># Extensions</span></div><div class="line"><span class="symbol">plugin:</span></div><div class="line">- hexo-generator-feed</div><div class="line"><span class="meta">#Feed Atom</span></div><div class="line"><span class="symbol">feed:</span></div><div class="line"><span class="symbol">  type:</span> atom</div><div class="line"><span class="symbol">  path:</span> atom.xml</div><div class="line"><span class="symbol">  limit:</span> <span class="number">20</span></div></pre></td></tr></table></figure></p>
+<p>8.添加评论功能</p>
+<p>先去<a href="https://disqus.com/" target="_blank" rel="external">disqus</a>注册，然后在主题的_config.yml中disqus项填写你的shortname即可</p>
+<p>8.使文章具有目录：</p>
+<p>在front-matter里添加<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">toc:</span> <span class="literal">true</span></div></pre></td></tr></table></figure></p>
+<h2 id="关于front-matter"><a href="#关于front-matter" class="headerlink" title="关于front-matter"></a>关于front-matter</h2><p>在搭建博客的过程中发现很多博主提到front-matter这个东西，遂查了一下hexo文档，将结果简要贴在下面：</p>
+<p><strong>front-matter是文件最上方以 --- 分隔的区域，用于指定个别文件的变量。</strong></p>
+<p>以下是预先定义的参数，您可在模板中使用这些参数值并加以利用。</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>layout</td>
+<td>布局</td>
+<td></td>
+</tr>
+<tr>
+<td>title</td>
+<td>标题</td>
+<td></td>
+</tr>
+<tr>
+<td>date</td>
+<td>建立日期</td>
+<td>文件建立日期</td>
+</tr>
+<tr>
+<td>updated</td>
+<td>更新日期</td>
+<td>文件更新日期</td>
+</tr>
+<tr>
+<td>comments</td>
+<td>开启文章的评论功能</td>
+<td>true</td>
+</tr>
+<tr>
+<td>tags</td>
+<td>标签（不适用于分页）</td>
+<td></td>
+</tr>
+<tr>
+<td>categories</td>
+<td>分类（不适用于分页）</td>
+<td></td>
+</tr>
+<tr>
+<td>permalink</td>
+<td>覆盖文章网址</td>
+</tr>
+</tbody>
+</table>
+<p>结束，不早了，睡觉，明天上班。</p>
+<p>2016.05.19 update domain:</p>
+<h2 id="给博客添加域名"><a href="#给博客添加域名" class="headerlink" title="给博客添加域名"></a>给博客添加域名</h2><p>首先，你需要拥有一个域名，国内的话，从万网买一个挺方便的。以我的域名<strong>channingsun.bid</strong>为例。</p>
+<p>然后，去万网的控制台添加域名解析的CNAME，如下图：</p>
+<p><img src="/img/开始Hexo博客之旅1.png" alt="附件1"></p>
+<p>第三步，去hexo的source文件夹下新建一个CNAME文件，内容为域名：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">channingsun</span><span class="selector-class">.bid</span></div></pre></td></tr></table></figure>
+<p>然后hexo g再hexo d即可。</p>
+<p>EOF</p>
+</div><script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="http://channingsun.github.io/2016/04/17/20160417_开始Hexo博客之旅/" data-id="ciu82lahl00015k0oafd5j3ur" class="article-share-link">分享到</a><div class="tags"><a href="/tags/Hexo/">Hexo</a></div><div class="post-nav"><a href="/2016/04/18/20160418_在Mac上搭建本地SVN服务器/" class="pre">在Mac上搭建本地SVN服务器</a></div><div id="disqus_thread"><script>var disqus_shortname = 'sunqiangsblog';
+var disqus_identifier = '2016/04/17/20160417_开始Hexo博客之旅/';
+var disqus_title = '开始Hexo博客之旅';
+var disqus_url = 'http://channingsun.github.io/2016/04/17/20160417_开始Hexo博客之旅/';
+(function() {
+  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();</script><script id="dsq-count-scr" src="//sunqiangsblog.disqus.com/count.js" async></script></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/心情随笔/">心情随笔</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/精品转载/">精品转载</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程技术/">编程技术</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/CSS/" style="font-size: 15px;">CSS</a> <a href="/tags/Hexo/" style="font-size: 15px;">Hexo</a> <a href="/tags/Mac/" style="font-size: 15px;">Mac</a> <a href="/tags/思考/" style="font-size: 15px;">思考</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/多线程/" style="font-size: 15px;">多线程</a> <a href="/tags/SVN/" style="font-size: 15px;">SVN</a> <a href="/tags/Android/" style="font-size: 15px;">Android</a> <a href="/tags/Proguard/" style="font-size: 15px;">Proguard</a> <a href="/tags/影评/" style="font-size: 15px;">影评</a> <a href="/tags/追星/" style="font-size: 15px;">追星</a> <a href="/tags/Git/" style="font-size: 15px;">Git</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最新文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/06/01/20160601_Git学习笔记/">Git学习笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/29/20160529_追星与脑残粉/">追星与脑残粉</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/22/20160522_直男癌眼中的欢乐颂/">直男癌眼中的欢乐颂</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/17/20160517_Android Library工程打成混淆jar包/">Android Library工程打成混淆jar包</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/10/20160510_给博客添加Timeline/">给博客添加Timeline</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/20/20160420_Java多线程学习笔记－基础篇/">Java多线程学习笔记－基础篇</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/19/20160419_做为技术人员为什么要写博客(转)/">作为技术人员为什么要写博客（转）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/18/20160418_在Mac上搭建本地SVN服务器/">在Mac上搭建本地SVN服务器</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/17/20160417_开始Hexo博客之旅/">开始Hexo博客之旅</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><script type="text/javascript" src="//sunqiangsblog.disqus.com/recent_comments_widget.js?num_items=5&amp;hide_avatars=1&amp;avatar_size=32&amp;excerpt_length=20&amp;hide_mods=1"></script></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="http://www.leocook.org/" title="跨界的IT博客" target="_blank">跨界的IT博客</a><ul></ul><a href="https://www.haomwei.com/" title="屠夫9441的博客" target="_blank">屠夫9441的博客</a><ul></ul><a href="https://blog.jamespan.me/" title="James Pan's Blog" target="_blank">James Pan's Blog</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">© <a href="/." rel="nofollow">SunQiang's Blog.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a id="rocket" href="#top" class="show"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.pack.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="/css/jquery.fancybox.css?v=0.0.0"><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>

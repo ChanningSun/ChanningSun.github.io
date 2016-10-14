@@ -1,0 +1,741 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>SunQiang&#39;s Blog</title>
+  <subtitle>我爱学习，学习爱我</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://channingsun.github.io/"/>
+  <updated>2016-07-14T15:18:13.000Z</updated>
+  <id>http://channingsun.github.io/</id>
+  
+  <author>
+    <name>SunQiang</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Git学习笔记</title>
+    <link href="http://channingsun.github.io/2016/06/01/20160601_Git%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    <id>http://channingsun.github.io/2016/06/01/20160601_Git学习笔记/</id>
+    <published>2016-05-31T16:00:00.000Z</published>
+    <updated>2016-07-14T15:18:13.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>近来在学git。</p>
+<p>话说用github两年了难道还不会git么？当然是会一点的，也就是init,diff,status,add,commit,push,clone几个命令，连版本回退都不会，更不用提分支处理什么的了。。。所以现在跟着<a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" target="_blank" rel="external">廖雪峰的Git教程</a>系统地学习一下.</p>
+<p>1.创建版本库</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">git init</span></div></pre></td></tr></table></figure>
+<p>2.添加文件到仓库</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git <span class="built_in">add</span> &lt;<span class="built_in">file</span>&gt;<span class="comment">	//可以git add * 一次性全部添加</span></div></pre></td></tr></table></figure>
+<p>3.提交修改</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">git</span> commit -m <span class="string">"commit message"</span></div></pre></td></tr></table></figure>
+<p>4.查看当前状态（有哪些文件增删修改过）</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">git status</span></div></pre></td></tr></table></figure>
+<p>5.查看具体修改的内容</p>
+<figure class="highlight delphi"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git diff &lt;<span class="keyword">file</span>&gt;		<span class="comment">//可以不带file，直接对比全部增删修改过的文件</span></div></pre></td></tr></table></figure>
+<p>6.查看提交历史</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">git <span class="built_in">log</span></div><div class="line">git <span class="built_in">log</span> <span class="comment">--pretty=oneline		//显示得更简洁</span></div><div class="line">git <span class="built_in">log</span> <span class="comment">--graph			//可以看到分支图</span></div></pre></td></tr></table></figure>
+<p>7.版本回退/恢复</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">git <span class="keyword">reset</span> <span class="comment">--hard HEAD^		//回退一个版本</span></div><div class="line">git <span class="keyword">reset</span> <span class="comment">--hard HEAD~2		//回退两个版本</span></div><div class="line">git <span class="keyword">reset</span> <span class="comment">--hard HEAD~100	//回退一百个版本</span></div></pre></td></tr></table></figure>
+<p>此命令会将当前内容回退到上次提交的内容。而若想直接回退/恢复到某一个版本：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git <span class="keyword">reset</span> <span class="comment">--hard d63288</span></div></pre></td></tr></table></figure>
+<p>其中d63288是想回退/恢复到的提交的版本号的前几位，版本号没必要写全，只写前几位即可。</p>
+<p>8.查看命令历史</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">git reflog</span></div></pre></td></tr></table></figure>
+<p>如果不知道想回到的提交的版本号，可通过上面的命令查询git命令历史，找到想要的版本号。</p>
+<p>9.撤销工作区的修改</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git checkout <span class="comment">-- &lt;file&gt;</span></div></pre></td></tr></table></figure>
+<p>可以让file在工作区发生的修改全部撤销，用用暂存区或版本库中的替换之。（即回退到上一次git add或git commit时的状态）</p>
+<p>10.撤销暂存区的修改</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git <span class="keyword">reset</span> <span class="keyword">HEAD</span> &lt;<span class="keyword">file</span>&gt;</div></pre></td></tr></table></figure>
+<p>如果修改已经被提交到暂存区，可使用上述命令将已提交到暂存区的修改删除，让暂存区的此文件与已经commit的版本库中的文件版本保持一致。</p>
+<p>11.文件删除</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git <span class="keyword">rm</span> &lt;<span class="keyword">file</span>&gt;</div></pre></td></tr></table></figure>
+<p>如果某个已经在暂存区或版本库的(一定经过了git add)文件被删除，那么无法通过git add将文件删除的修改提交到暂存区。只能通过git rm该文件将文件从版本库移除。然后再commit即可。</p>
+<p>12.克隆远程版本库</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git <span class="keyword">clone</span> <span class="title">&lt;ssh-url</span>&gt;/<span class="tag">&lt;https-url&gt;</span></div></pre></td></tr></table></figure>
+<p>类似于SVN的版本库导出到本地。</p>
+<p>13.关联远程库</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git remote <span class="keyword">add</span><span class="bash"> origin &lt;ssh-url&gt;</span></div><div class="line">git push -u origin master</div></pre></td></tr></table></figure>
+<p>第一条命令可将本地git仓库关联到远程库上。第二条是将本地所有内容提交上去。与SVN类似，如果远程仓库不是空的，那么需要先pull和merge才行，第二条命令会失败。</p>
+<p>这里由于远程库是空的，我们第一次推送master分支时，加上了-u参数，Git不但会把本地的master分支内容推送到远程新的master分支，还会把本地的master分支和远程的master分支关联起来，在以后的推送或者拉取时就可以简化命令。</p>
+<p>14.创建/切换分支</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git checkout -<span class="selector-tag">b</span> dev	<span class="comment">//创建并切换到dev分支</span></div></pre></td></tr></table></figure>
+<p>此命令等同于以下两条命令：</p>
+<figure class="highlight q"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git branch <span class="built_in">dev</span>		<span class="comment">//创建dev分支</span></div><div class="line">git checkout <span class="built_in">dev</span>		<span class="comment">//切换到dev分支，如果本地有未提交的代码，分支切换会失败</span></div></pre></td></tr></table></figure>
+<p>15.查看分支</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">git branch</span></div></pre></td></tr></table></figure>
+<p>16.合并分支</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">git checkout master</div><div class="line">git <span class="keyword">merge</span> dev			<span class="comment">//将dev分支上已提交的内容合并到master，如果本地有未提交的代码，该命令会失败。两遍都已经提交的部分如果有冲突需要手动解决</span></div><div class="line">git <span class="keyword">merge</span> --<span class="keyword">no</span>-ff -<span class="keyword">m</span> <span class="string">"merge with no-ff"</span> dev <span class="comment">//普通模式合并</span></div></pre></td></tr></table></figure>
+<p>17.删除分支</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">git</span> <span class="keyword">branch </span>-d dev</div></pre></td></tr></table></figure>
+<p>18.储存工作现场</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">git stash</span></div></pre></td></tr></table></figure>
+<p>19.Bug分支场景</p>
+<p>场景说明：当前正在dev分支上做开发，开发工作尚未完成不能提交。此时接到一个id为101的bug，需要在master分支上立即修复。</p>
+<p>对应操作：</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">git status		<span class="comment">//查看当前状态，应该会有很多modified文件、new文件什么的</span></div><div class="line">git satsh			<span class="comment">//保存当前工作状态</span></div><div class="line">git checkout master	<span class="comment">//切换到master分支</span></div><div class="line">git checkout -b bug<span class="number">-101</span>		<span class="comment">//从master分支新建一个临时分支用于改bug</span></div><div class="line">...						<span class="comment">//解决bug中</span></div><div class="line">git add *				<span class="comment">//add修改</span></div><div class="line">git commit -m <span class="string">"fix bug 101"</span>	<span class="comment">//提交修改</span></div><div class="line">git checkout master	<span class="comment">//切换到master分支</span></div><div class="line">git merge --no-ff -m <span class="string">"merge bug fix 101"</span> bug<span class="number">-101</span> <span class="comment">//bug修改合并到master</span></div><div class="line">git branch -d bug<span class="number">-101</span>		<span class="comment">//删除临时的bug分支</span></div><div class="line">git checkout dev				<span class="comment">//改完bug，回到dev分支</span></div><div class="line">git stash <span class="type">list</span>				<span class="comment">//查看stash列表</span></div><div class="line">git stash apply stash@&#123;<span class="number">0</span>&#125;	<span class="comment">//恢复stash</span></div><div class="line">git stash drop stash@&#123;<span class="number">0</span>&#125;	<span class="comment">//删除此stash（apply和drop的过程可以用git stash pop一条命令替代）</span></div></pre></td></tr></table></figure>
+<p>20.强行删除分支</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">git branch -D &lt;name&gt;</div><div class="line"><span class="regexp">//</span>删除远程分支但不删除本地分支：</div><div class="line">git push origin <span class="symbol">:&lt;name&gt;</span></div></pre></td></tr></table></figure>
+<p>如果一个分支的里有一些commit的内容没有合并到其他分支，直接删除会提示错误。需要用大D参数强行删除。</p>
+<p>21.查看远程库信息</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">git remote -v</span></div></pre></td></tr></table></figure>
+<p>22.推送分支</p>
+<figure class="highlight maxima"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git <span class="built_in">push</span> <span class="built_in">origin</span> master</div><div class="line">git <span class="built_in">push</span> <span class="built_in">origin</span> dev</div></pre></td></tr></table></figure>
+<p>23.抓取分支</p>
+<figure class="highlight q"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git checkout -b <span class="built_in">dev</span> origin/<span class="built_in">dev</span></div></pre></td></tr></table></figure>
+<p>别人从git上clone，默认只能看到master分支。想要看到dev分支，需要执行上述命令。</p>
+<p>24.指定本地分支与远程分支的链接</p>
+<figure class="highlight q"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git branch --<span class="built_in">set</span>-upstream <span class="built_in">dev</span> origin/<span class="built_in">dev</span></div></pre></td></tr></table></figure>
+<p>25.多人协作工作场景</p>
+<figure class="highlight delphi"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">git push origin branch-<span class="keyword">name</span>	<span class="comment">//推送自己的修改</span></div><div class="line">git pull	<span class="comment">//如果推送失败，则因为远程分支比你的本地更新，需要先试图合并</span></div><div class="line">...			<span class="comment">//如果合并有冲突，则解决冲突，并在本地提交</span></div><div class="line">git push origin branch-<span class="keyword">name</span>	<span class="comment">//再次尝试推送！</span></div><div class="line">git branch --<span class="keyword">set</span>-upstream branch-<span class="keyword">name</span> origin/branch-<span class="keyword">name</span>	<span class="comment">//如果git pull提示“no tracking information”，则说明本地分支和远程分支的链接关系没有创建，用此命令链接</span></div></pre></td></tr></table></figure>
+<p>26.创建标签</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">git <span class="keyword">tag</span> <span class="title">v1</span>.<span class="number">0</span>					//默认在当前版本打<span class="keyword">tag</span></div><div class="line"><span class="title">git</span> <span class="keyword">tag</span> <span class="title">v0</span>.<span class="number">9</span> <span class="number">9241</span>fd			//在之前某个版本打<span class="keyword">tag</span></div><div class="line"><span class="title">git</span> <span class="keyword">tag</span> <span class="title">-a</span> v0.<span class="number">8</span> -m <span class="string">"version 0.8 released"</span> <span class="number">3628164</span>	//给标签添加说明</div></pre></td></tr></table></figure>
+<p>查看tag列表：</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git <span class="keyword">tag</span></div></pre></td></tr></table></figure>
+<p>查看tag具体信息：</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git <span class="keyword">show </span><span class="built_in">v1</span>.<span class="number">0</span></div></pre></td></tr></table></figure>
+<p>27.操作标签</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">git tag -d v0.<span class="number">1</span>		<span class="comment">//删除标签</span></div><div class="line">git <span class="keyword">push</span> origin v1.<span class="number">0</span>	<span class="comment">//标签默认都储存在本地，推送某个标签到远程需要手动推送</span></div><div class="line">git <span class="keyword">push</span> origin --tags	<span class="comment">//推送所有标签</span></div><div class="line">git <span class="keyword">push</span> origin :refs<span class="regexp">/tags/</span>v1.<span class="number">0</span>		<span class="comment">//可以删除一个远程标签。</span></div></pre></td></tr></table></figure>
+<p>28.删除错误的commit<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git <span class="keyword">reset</span> <span class="comment">--hard &lt;commit_id&gt;</span></div><div class="line">git push origin <span class="keyword">HEAD</span> <span class="comment">--force</span></div></pre></td></tr></table></figure></p>
+<p>回退到之前的某一个版本，然后强推到服务器。注意服务器如果有分支保护需要先关闭。</p>
+<p>EOF</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;近来在学git。&lt;/p&gt;
+&lt;p&gt;话说用github两年了难道还不会git么？当然是会一点的，也就是init,diff,status,add,commit,push,clone几个命令，连版本回退都不会，更不用提分支处理什么的了。。。所以现在跟着&lt;a href=&quot;http:/
+    
+    </summary>
+    
+      <category term="编程技术" scheme="http://channingsun.github.io/categories/%E7%BC%96%E7%A8%8B%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Git" scheme="http://channingsun.github.io/tags/Git/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>追星与脑残粉</title>
+    <link href="http://channingsun.github.io/2016/05/29/20160529_%E8%BF%BD%E6%98%9F%E4%B8%8E%E8%84%91%E6%AE%8B%E7%B2%89/"/>
+    <id>http://channingsun.github.io/2016/05/29/20160529_追星与脑残粉/</id>
+    <published>2016-05-28T16:00:00.000Z</published>
+    <updated>2016-07-14T15:17:46.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>之前因为无聊，就看了跑男，虽然感觉越来越无聊，但也勉强一直追了下来。然后这周的跑男因为宋仲基参加，估计会让万千脑残少女兴奋到高潮吧。</p>
+<p>其实我对这些所谓的明星，因为不感兴趣所以很少关注他们本身，所以也无从对之产生好恶。所以我对他们的喜好大多数情况下是由他们粉丝的表现来的。</p>
+<p>上上周的跑男有个嘉宾Rain，对于我来说当然是不知其何许人也。但是后来明白他是韩国的艺人，于是便产生了一种下意识的厌恶。对韩国艺人的厌恶，其实一方面是因为之前韩国棒子无耻的申遗行为，另一方面是因为国内哈韩脑残粉的存在。但是通过后面的节目发现，其实Rain好像人品和才能都还不错的样子，游戏也很认真<span class="heimu" title="富强民主文明和谐，自由平等公正法治，爱国敬业诚信友善">当然，如果这都是导演安排好的剧本，那导演我操你祖宗十八代</span>。对之的厌恶也就不存在了，反而开始反思我自己为何会带着偏见来看待别人。</p>
+<p>上周的跑男是在韩国录制的，嘉宾是韩国原版的奔跑团。其实对这几位也没什么厌恶的，因为之前零星地看过几集韩版RM，当然也谈不上喜欢。不过，宋智孝还是不错的，我很喜欢她在《霜花店》中的出演。</p>
+<p>本周的，就是宋仲基了，因为《太阳的后裔》而让无数中国脑残粉喊老公的韩国艺人。同样对之首先也是一股厌恶感，这厌恶感其实是他的脑残粉带来的。同样，在其后的节目中也发现其实他的品行都还是很不错的，不仅有颜值，而且还很认真。是我错了。</p>
+<p>仔细想想，其实日韩的艺人、明星，比我们国内的大多数明星好太多了，无论人品、才能还是态度。而我之所以对他们反感，主要就是因为上面所说的脑残粉吧。当初《来自星星的你》流行之时，一大堆人张口“都教授”闭口“都敏俊xi”，还有一大堆喊老公的、富婆重金买人家共进晚餐的。。。或许金秀贤本身没问题，但是这帮脑残粉真的很丢人。</p>
+<p>说真的，我对于脑残粉的态度，就是，如果杀人不违法，全都杀掉好了。</p>
+<p>什么样的脑残粉应该杀掉呢？</p>
+<p>最典型的：杨丽娟，长得跟猪似的，疯狂迷恋刘德华，追星十三年，耗尽家财，老父被迫卖肾、跳海。就是下面这个傻逼，她为什么还活着。<img src="/img/追星与脑残粉1.jpg" alt="杨丽娟"></p>
+<p>其次，杜海涛。在他那一跪之前，我根本不知道权志龙是何许人也，他跪了之后就知道了。作为公众人物，在电视观众面前卑躬屈膝，真的，除了脑残，就是脑瘫。这么傻屌的一个人，硬是被芒果台捧成那样，也是够了。赶紧去死吧。<img src="/img/追星与脑残粉2.jpg" alt="跪舔狂魔"></p>
+<p>然后，四叶草。四叶草就是大名鼎鼎的掏粪男孩的粉丝团，也是人们黑掏粪男孩的主要原因：其粉丝群体普遍脑残。有百万承包广告屏祝掏粪男孩生日快乐的，有要众筹给他们买海岛建王国的，当然，典型的就是下面这样的。<img src="/img/追星与脑残粉3.jpg" alt="四叶草">请人道毁灭他们好么。</p>
+<p>还有，行星饭，也就是EXO的粉丝。个人性格原因，难以欣赏街舞、晃眼的灯光、rap等构成的男团的演出。还有那些人杀马特的打扮也不感冒。当然，不喜欢不看就好了，人家远在韩国，理论上不容易看到。但是。。。那些脑残粉，会通过各种方式：上新闻，发帖子、引骂战，来强奸你的眼球。如果不是他们，大多数人谁知道啥是EXO，也就不会有EXO傻逼之说了。<img src="/img/追星与脑残粉4.jpg" alt="EXO傻逼"></p>
+<p>上面的四个只是代表，还有大堆的脑残粉，有冲上台扑倒偶像的，有为了看偶像一眼和看门保安睡觉的，有人家过生日他刷屏的。真的，估计她爹的生日都没她偶像的生日记得清。</p>
+<p>当然，还有每年四月一号肯定会刷爆朋友圈的“哥哥”，真的，肉麻的要死。</p>
+<p>总结一下：脑残粉＝脑残＋家教不好＋所处圈子很low</p>
+<p>EOF</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;之前因为无聊，就看了跑男，虽然感觉越来越无聊，但也勉强一直追了下来。然后这周的跑男因为宋仲基参加，估计会让万千脑残少女兴奋到高潮吧。&lt;/p&gt;
+&lt;p&gt;其实我对这些所谓的明星，因为不感兴趣所以很少关注他们本身，所以也无从对之产生好恶。所以我对他们的喜好大多数情况下是由他们粉丝的
+    
+    </summary>
+    
+      <category term="心情随笔" scheme="http://channingsun.github.io/categories/%E5%BF%83%E6%83%85%E9%9A%8F%E7%AC%94/"/>
+    
+    
+      <category term="追星" scheme="http://channingsun.github.io/tags/%E8%BF%BD%E6%98%9F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>直男癌眼中的欢乐颂</title>
+    <link href="http://channingsun.github.io/2016/05/22/20160522_%E7%9B%B4%E7%94%B7%E7%99%8C%E7%9C%BC%E4%B8%AD%E7%9A%84%E6%AC%A2%E4%B9%90%E9%A2%82/"/>
+    <id>http://channingsun.github.io/2016/05/22/20160522_直男癌眼中的欢乐颂/</id>
+    <published>2016-05-21T16:00:00.000Z</published>
+    <updated>2016-07-14T15:17:43.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>五一回去的时候听女票说起《欢乐颂》这个电视剧，于是满怀期待地将之下载下来。花了两个周末四天时间，平均每天十集，不可谓不疯狂。或许是太久没有看电视剧了，一开始我还感觉挺好看的，然而看到二十集不到就看不下去了，甚至第二个周末完全是强忍着看完的。</p>
+<p>本想一路看到大结局，看看为啥安迪和小包总结婚，看看樊胜美和王柏川分分合合又是为哪般。然而看到四十二集的我眼泪掉下来：妈蛋，还有第二季。反正我是不打算自找麻烦再追下去了，我宁愿看看还有没有值得一看的日漫新番，或者重温经典老番。这种三观不正的烂片，本质上与小时代一般无二。</p>
+<p>至于为什么看完后还要BB，实在是因为此剧槽点太多＋本宝宝直男癌发作，不BB难受。下面谈谈我看完这个玩意儿后的感想：</p>
+<h2 id="旁白"><a href="#旁白" class="headerlink" title="旁白"></a>旁白</h2><p>这部剧的旁白不仅突兀可笑，还说明了制作方是把观众当傻逼来对待的。讲道理，刘涛蒋欣等人在剧中演技几乎无可挑剔，观众完全可以从他们的眼神、表情中get到她们的想法、心情，那个旁白还傻逼似的在旁边解释一遍。每当我去体味主角的眼神，嘴角锁表达出来的意思的时候，旁白的响起都会让我有一种哔了狗的感觉。</p>
+<h2 id="安迪"><a href="#安迪" class="headerlink" title="安迪"></a>安迪</h2><p>高智商白富美，然而身世凄惨，因此心结甚重，怪癖甚多：受不了跟人肢体接触（话说你跟小曲去SPA的时候人家在你身上按摩你咋不抵触呢），喝水只喝依云玻璃瓶装水（相信我，那个玻璃瓶比里面装的四两水重多了），凡事讲逻辑，高高在上，喜欢上帝视角。</p>
+<p>自幼被弃的她，通过自己过人的头脑一路跳级，并努力成为了华尔街的高管。她最大的自信就是来源于自己过人的头脑，因此在得知自己可能患精神病后，才会那么失态和崩溃。当然，从那以后，她的上帝视角倒是少了很多，<del>不牛逼了吧</del>。</p>
+<p>然后就是对待奇点，奇点伴她一路走来，目的很明确，安迪也很清楚。然而在奇点想讨好安迪给安迪找爸爸，结果却由此击垮了安迪最后的高傲的时候，安迪再也无法接受奇点了，美其名曰，我有精神病，我不想害你。然而根据小说剧情，第二季最先和小包结婚生孩子的也是她。怎么不担心拖累别人了，怎么不担心遗传给孩子了？呵呵！<span class="heimu" title="你知道的太多了">Bitch!</span>因此在直男癌的我的眼中，奇点是莽撞地一脚踹开了安迪的门，将安迪从云端打落成凡人，安迪接受了凡人的生活，却永远记恨上了那个踹开她的门的那个人。</p>
+<p>剧中，安迪带着起点一脚油门就往阳台外面冲，奇点说你有病啊快停下。我觉得很正常啊，换做任何人坐在副驾驶上，要被人往鬼门关里带都会破口大骂你有病啊，甚至还会有很大的概率抽死那个踩油门的傻逼。然而安迪却说，啊，你说我有病了是吧，你看你下意识还是这样看我的，所以你走吧。。。对此我只想说，贱人就是矫情。</p>
+<p>剧中安迪的戏份最多，在我看来也是槽点最多。当然，吐槽的是人物形象本身，而不是演员刘涛。刘涛演的还是很不错的。</p>
+<h2 id="小曲"><a href="#小曲" class="headerlink" title="小曲"></a>小曲</h2><p>纨绔子弟，在外国留学混日子，然而被妈妈叫回来争家产的大小姐。性格洒脱不羁，直来直去，“拎的清”。然而，她的槽点相比安迪也少不到哪儿去。</p>
+<p>一开场就是GI项目，一本书似的厚厚的英文资料居然用一个星期就看完了，当还不只是看完，因为人家还要理解运用并和外资谈判，明明一开始的时候连单词都看不懂的好么。英语水平真的能进步那么快么，你这样让那些英语四六级考了一次又一次的人情何以堪。而且其后用雷军式的英语和老外谈笑风生并且还成功拿下单子了，曲筱绡You are cool, are you OK? Do you like Mi band?</p>
+<p>然后就是她对事采用双重标准。什么是双重标准，举个最近的例子。有个码农，做了一套授课视频放在网上让人付费观看，结果他发现有人把他的视频下载后放到淘宝卖。于是他非常生气地各种在网上投诉，说自己被盗版被侵权。随后就有人发现他管理的QQ群里各种盗版视频和电子书多了去了。这就是双重标准，用一套标准去苛责别人，另一套标准来满足自己。简而言之，bitch。</p>
+<p>小曲同学说自己平生最恨小三小四，因为他爹旁边倒贴的女人太多。但是当他遇见赵医生的时候，根据万能的姚滨提供的资料，赵医生很有可能是有女朋友或者未婚妻的。然而小曲的态度是：“那又怎样，各凭本事，竞争上岗呗～”。啊呸！</p>
+<p>当然，还有一点个人看法：酒吧夜店不是好女孩该去的地方，而小曲是其中常客。</p>
+<h2 id="关关"><a href="#关关" class="headerlink" title="关关"></a>关关</h2><p>个人一开始就比较喜欢的角色。温柔懂事家教好，长发长腿皮肤白，是屌丝心中理想的女朋友形象。唯一一点稍微让人不舒服的地方就是遇见赵医生那段，花痴的过分了。</p>
+<h2 id="蚯蚓"><a href="#蚯蚓" class="headerlink" title="蚯蚓"></a>蚯蚓</h2><p>用安迪的话说，是“一根直肠通大脑”类型的。一开始的举止真是傻逼透顶。卡电梯里了还敢乱蹦，为人处事不识眼色，跟人认识才几天就跟人家上床跟人家同居，姑娘，你看起来很随便嘛。我觉得这种裤子很好脱的女人，不是脑子有问题，就是生性放荡。之前看新闻，有在跟情人啪啪啪时嫌孩子哭把孩子掐死了的，有怀了情人的孩子然后把自己亲生儿子捂死了的，还有各种怀孕了在厕所生完孩子扔掉的。所以说对自己不负责任的人是脑残的，而脑残是没有下限的。</p>
+<p>然后，被白渣男玩够了扔了还去看成功学，智商真的堪忧，都上过大学的人还相信鸡汤，无语。消费主义、性自由和成功学，现代社会三大毒药她占了俩。不过还好后面遇见的人都还不错，也让她再傻逼下去，不然真没眼看了。</p>
+<h2 id="樊大姐"><a href="#樊大姐" class="headerlink" title="樊大姐"></a>樊大姐</h2><p>被家庭拖累的可怜女人，爱慕虚荣。其实虚荣本就是自卑的一种表现。也确实，她那个家，真的，让人看不下去。樊家爸妈还有樊家大哥以及显然已经没救了的熊孩子，让人想冲到屏幕里一刀一个都剁了才舒服。这几个蛆虫说多了恶心，不说了。</p>
+<p>然而，虽然有这种家庭因素，但是她在私人山庄上那么说王柏川还是让我受不了。王柏川一片真心对你，你却将他男人的自尊心放在众人面前狠狠践踏，真有你的。那些男人在他们还没混出样子的时候，你没眼看人家，在男人功成名就之后，你还想“掐尖”，可真是想的美，人家那时候倒贴的女人多了去了，你算老几。这点儿都不懂，难怪三十了还嫁不出去。</p>
+<h2 id="老谭"><a href="#老谭" class="headerlink" title="老谭"></a>老谭</h2><p>安迪的老同学，百亿身价，上海的商界传奇。因为扮演者的颜值而被广大脑残少女/妇女追捧。别的就不说了，刘思明无才无德你却让他身居高位，显然就是你用人不察。后来在安迪的雷厉风行下加班猝死（一开始是猝死，后来网络播出改成昏阙），显然安迪难辞其咎，老谭也脱不了干系。然而，老谭跟安迪说，他的死与你无关。说到刘思明家人还用那种被碰瓷的人讹上了的口气，也是没谁了。好了，那么人家加班累死了，逼他熬夜改文案的人没错，把他放到这个位置的人没错，那么，是他该死咯？</p>
+<p>还有，他之前说奇点是个只保全自己的人，08年经济危机时手段不干净。然而他怎么没想自己呢。安迪和他是同学，也就是说起码20岁左右的时候，他还是个学生。然后他用了十年时间，身价百亿。。。这其中又有多少故事呢？这种事放到互联网行业还可信，因为互联网行业的软件一旦开发出来，复制是几乎没有成本的。而老谭是在传统行业，销售额，利润都要靠卖一个个产品、一个个单子累积来的。十年时间迅速积累大量财富，在中国的话，只有一种可能：有个红色资本家的好干爹/姐夫/岳父…所以，你有什么资格说别人呢。</p>
+<h2 id="奇点"><a href="#奇点" class="headerlink" title="奇点"></a>奇点</h2><p>世事洞明，风趣幽默，是本剧我最喜欢的角色，也是我的偶像。</p>
+<p>然而对女人方面，努力错了方向。一层层地解开了安迪的心结，结果因为看到了安迪的卑微之处而出局。确实可悲。还是人家包总会撩妹，多跟人家学着点儿，人家可是女朋友数都数不过来的撩妹达人。</p>
+<p>网上很多人说他猥琐，不过是因为他的颜值没有其它几个人高而已，换胡歌来演，我想<span class="heimu" title="呵呵">那帮脑残少女/妇女屁都不会放一个还会巴巴地跪舔</span>。。。就像老谭，在原著里是个不好看的胖子，结果因为是靳东扮演。。。你们开心就好。</p>
+<h2 id="王柏川"><a href="#王柏川" class="headerlink" title="王柏川"></a>王柏川</h2><p>事业刚起步的苦逼小老板，然而不改初心还是喜欢小美，知道小美住合租房还是喜欢小美，被小美当众羞辱还是忍不住喜欢小美。。。</p>
+<p>所以说你所流的泪都是你脑子里进的水啊！</p>
+<h2 id="三观"><a href="#三观" class="headerlink" title="三观"></a>三观</h2><p>借用《暴走看啥片》的评价：穷逼白努力，有钱事事济。三观之不正，仅略输小时代一筹。</p>
+<p>好了，BB完了，舒服多了，以上就是一个直男屌丝看完这个烂片儿之后的感想。</p>
+<p>EOF</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;五一回去的时候听女票说起《欢乐颂》这个电视剧，于是满怀期待地将之下载下来。花了两个周末四天时间，平均每天十集，不可谓不疯狂。或许是太久没有看电视剧了，一开始我还感觉挺好看的，然而看到二十集不到就看不下去了，甚至第二个周末完全是强忍着看完的。&lt;/p&gt;
+&lt;p&gt;本想一路看到大结局
+    
+    </summary>
+    
+      <category term="心情随笔" scheme="http://channingsun.github.io/categories/%E5%BF%83%E6%83%85%E9%9A%8F%E7%AC%94/"/>
+    
+    
+      <category term="影评" scheme="http://channingsun.github.io/tags/%E5%BD%B1%E8%AF%84/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Android Library工程打成混淆jar包</title>
+    <link href="http://channingsun.github.io/2016/05/17/20160517_Android%20Library%E5%B7%A5%E7%A8%8B%E6%89%93%E6%88%90%E6%B7%B7%E6%B7%86jar%E5%8C%85/"/>
+    <id>http://channingsun.github.io/2016/05/17/20160517_Android Library工程打成混淆jar包/</id>
+    <published>2016-05-16T16:00:00.000Z</published>
+    <updated>2016-07-14T15:17:36.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>在项目中使用eclipse编写了一个Android的Library工程，现需要将工程导出成jar包，并且混淆，然后提交给外部使用。要求除了外部需要调用的接口，其他部分需要proguard混淆和优化。</p>
+<p>下面是实现的过程。</p>
+<h2 id="导出jar包"><a href="#导出jar包" class="headerlink" title="导出jar包"></a>导出jar包</h2><p>获取未混淆的jar包，这里有两种方式：</p>
+<ol>
+<li>使用eclipse的export导出功能</li>
+<li>直接从bin文件夹获取</li>
+</ol>
+<p>1方法就是通用的方法，先在library工程上右键，选择export，然后选择java标签下的jar file，然后将除了src之外的所有文件夹取消勾选，导出即可，如下图：</p>
+<p><img src="/img/Android Library工程打成混淆jar包1.png" alt="附件1"></p>
+<p><img src="/img/Android Library工程打成混淆jar包2.png" alt="附件2"></p>
+<p>而2方法简单的多。library工程在被其他工程依赖时，会自动在bin目录下生成编译好的jar包，直接拿此jar包用即可。经过反编译查看此jar包与export导出的jar包的内容是一样的，可放心使用。</p>
+<h2 id="使用proguard混淆"><a href="#使用proguard混淆" class="headerlink" title="使用proguard混淆"></a>使用proguard混淆</h2><p>平时在eclipse打混淆包时，eclipse会自动找到你在project.properties中定义的proguard配置，并通过命令行调用proguard进行混淆、优化。而这里，我们可以使用proguard提供的gui工具进行混淆。</p>
+<p>gui工具在android的sdk目录下的tools/proguard/lib/proguardgui.jar，双击打开即可。界面如下：</p>
+<p><img src="/img/Android Library工程打成混淆jar包3.png" alt="附件3"></p>
+<p>1.先点击底部的load configuration，加载写好的配置文件（请先学习proguard的配置语法）：</p>
+<p><img src="/img/Android Library工程打成混淆jar包4.png" alt="附件4"></p>
+<p>2.然后右边的选项点到Input/Output选项，如下图：</p>
+<p><img src="/img/Android Library工程打成混淆jar包5.png" alt="附件5"></p>
+<p>3.在上面add input添加要混淆的jar包，add output添加要生成的jar包。（这里很不合理，因为我要生成的jar包肯定是现在还不存在的，但是它在选择框里要求你选择一个已经存在的jar包。没办法，这里我先用”touch des.jar”新建了一个空白的文件，然后才选的）。</p>
+<p>4.然后在下面添加依赖jar包。因为我的工程只用到了android.jar，所以就只把它添加进去了。</p>
+<p>5.然后左侧的下面几个看不懂的tab就不要点了，也不要点下面的next跟着它的节奏走，因为proguard的配置我们之前已经加载进去了。所以现在直接点Process标签，然后点击最下方的“Process!”按钮。过一会儿就会得到优化好的、混淆的jar包。</p>
+<p>如果过程中出现问题，那么一定是proguard的配置文件写的不对！修改此文件，然后重复上述流程。</p>
+<h2 id="Proguard配置文件"><a href="#Proguard配置文件" class="headerlink" title="Proguard配置文件"></a>Proguard配置文件</h2><p>其实核心还是这个文件，首先，我在网上看到一个通用的配置：</p>
+<figure class="highlight haml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line">-<span class="ruby">optimizationpasses <span class="number">5</span></span></div><div class="line">-<span class="ruby">dontusemixedcaseclassnames</span></div><div class="line">-<span class="ruby">dontskipnonpubliclibraryclasses</span></div><div class="line">-<span class="ruby">dontpreverify</span></div><div class="line">-<span class="ruby">verbose</span></div><div class="line">-<span class="ruby">optimizations !code/simplification/arithmetic,!field/*,!<span class="class"><span class="keyword">class</span>/<span class="title">merging</span>/*</span></span></div><div class="line"></div><div class="line">-<span class="ruby">keep public <span class="class"><span class="keyword">class</span> * <span class="title">extends</span> <span class="title">android</span>.<span class="title">app</span>.<span class="title">Activity</span></span></span></div><div class="line">-<span class="ruby">keep public <span class="class"><span class="keyword">class</span> * <span class="title">extends</span> <span class="title">android</span>.<span class="title">app</span>.<span class="title">Application</span></span></span></div><div class="line">-<span class="ruby">keep public <span class="class"><span class="keyword">class</span> * <span class="title">extends</span> <span class="title">android</span>.<span class="title">app</span>.<span class="title">Service</span></span></span></div><div class="line">-<span class="ruby">keep public <span class="class"><span class="keyword">class</span> * <span class="title">extends</span> <span class="title">android</span>.<span class="title">content</span>.<span class="title">BroadcastReceiver</span></span></span></div><div class="line">-<span class="ruby">keep public <span class="class"><span class="keyword">class</span> * <span class="title">extends</span> <span class="title">android</span>.<span class="title">content</span>.<span class="title">ContentProvider</span></span></span></div><div class="line">-<span class="ruby">keep public <span class="class"><span class="keyword">class</span> * <span class="title">extends</span> <span class="title">android</span>.<span class="title">app</span>.<span class="title">backup</span>.<span class="title">BackupAgentHelper</span></span></span></div><div class="line">-<span class="ruby">keep public <span class="class"><span class="keyword">class</span> * <span class="title">extends</span> <span class="title">android</span>.<span class="title">preference</span>.<span class="title">Preference</span></span></span></div><div class="line">-<span class="ruby">keep public <span class="class"><span class="keyword">class</span> <span class="title">com</span>.<span class="title">android</span>.<span class="title">vending</span>.<span class="title">licensing</span>.<span class="title">ILicensingService</span></span></span></div><div class="line"></div><div class="line">-<span class="ruby">keepclasseswithmembernames <span class="class"><span class="keyword">class</span> * &#123;</span></span></div><div class="line">    native &lt;methods&gt;;</div><div class="line">&#125;</div><div class="line"></div><div class="line">-<span class="ruby">keepclasseswithmembers <span class="class"><span class="keyword">class</span> * &#123;</span></span></div><div class="line">    public &lt;init&gt;(android.content.Context, android.util.AttributeSet);</div><div class="line">&#125;</div><div class="line"></div><div class="line">-<span class="ruby">keepclasseswithmembers <span class="class"><span class="keyword">class</span> * &#123;</span></span></div><div class="line">    public &lt;init&gt;(android.content.Context, android.util.AttributeSet, int);</div><div class="line">&#125;</div><div class="line"></div><div class="line">-<span class="ruby">keepclassmembers <span class="class"><span class="keyword">class</span> * <span class="title">extends</span> <span class="title">android</span>.<span class="title">app</span>.<span class="title">Activity</span> &#123;</span></span></div><div class="line">   public void *(android.view.View);</div><div class="line">&#125;</div><div class="line"></div><div class="line">-<span class="ruby">keepclassmembers enum * &#123;</span></div><div class="line">    public static **[] values();</div><div class="line">    public static ** valueOf(java.lang.String);</div><div class="line">&#125;</div><div class="line"></div><div class="line">-<span class="ruby">keep <span class="class"><span class="keyword">class</span> * <span class="title">implements</span> <span class="title">android</span>.<span class="title">os</span>.<span class="title">Parcelable</span> &#123;</span></span></div><div class="line">  public static final android.os.Parcelable$Creator *;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>直接使用此配置作为混淆文件是不行的，我100k左右的jar包经过上述配置混淆后只剩8k，反编译后发现只剩下了寥寥几个类。原来是我的对外接口没有暴露出来，结果被当作无用的代码优化掉了。</p>
+<p>因此对外接口需要暴露出来不混淆，在配置文件底部增加：</p>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">-keep <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">com</span>.<span class="title">test</span>.<span class="title">MyAgent</span> </span>&#123;</div><div class="line">	<span class="keyword">public</span> &lt;fields&gt;;</div><div class="line">	<span class="keyword">public</span> &lt;methods&gt;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>其中MyAgent就是我的对外接口。再次混淆就会发现混淆后的jar包果然变大了。</p>
+<p>然而，此时发现其实还有一些类是需要对外暴露的。于是继续添加配置：</p>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">-keep <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">com</span>.<span class="title">test</span>.<span class="title">MyInterface</span> </span>&#123;</div><div class="line">	<span class="keyword">public</span> &lt;fields&gt;;</div><div class="line">	<span class="keyword">public</span> &lt;methods&gt;;</div><div class="line">&#125;</div><div class="line"></div><div class="line">-keep <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> * <span class="keyword">implements</span> <span class="title">com</span>.<span class="title">test</span>.<span class="title">MyInterface</span> </span>&#123;</div><div class="line">	<span class="keyword">public</span> &lt;fields&gt;;</div><div class="line">	<span class="keyword">public</span> &lt;methods&gt;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这里规定不混淆MyInterface以及实现了MyInterface接口的文件。</p>
+<p>然后还有问题，我将所有的枚举都作为内部类放在了一个EnumUtil中，这些枚举外部也有调用的需要。因此添加：</p>
+<figure class="highlight haml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">-<span class="ruby">keep public <span class="class"><span class="keyword">class</span> <span class="title">com</span>.<span class="title">test</span>.<span class="title">utils</span>.<span class="title">EnumUtil</span> &#123;</span></span></div><div class="line">	*;</div><div class="line">&#125;</div><div class="line"></div><div class="line">-<span class="ruby">keepnames <span class="class"><span class="keyword">class</span> <span class="title">com</span>.<span class="title">test</span>.<span class="title">utils</span>.<span class="title">EnumUtil</span>$* &#123;</span></span></div><div class="line">	*;</div><div class="line">&#125;</div><div class="line"></div><div class="line">-<span class="ruby">keepattributes InnerClasses</span></div></pre></td></tr></table></figure>
+<p>规定不混淆EnumUtil中的内部类即可。</p>
+<p>2016.05.22 update:</p>
+<p>jar包里如果用到资源文件千万别用反射的方法获取，因为混淆之后会出问题。。。先是我，然后是两个同事都掉进了<a href="http://blog.csdn.net/xiaanming/article/details/9257853" target="_blank" rel="external">这篇文章</a>的坑里了。</p>
+<p>直接用context.getResources().getIdentify()的方法获取资源id即可。</p>
+<p>EOF</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在项目中使用eclipse编写了一个Android的Library工程，现需要将工程导出成jar包，并且混淆，然后提交给外部使用。要求除了外部需要调用的接口，其他部分需要proguard混淆和优化。&lt;/p&gt;
+&lt;p&gt;下面是实现的过程。&lt;/p&gt;
+&lt;h2 id=&quot;导出jar包&quot;&gt;
+    
+    </summary>
+    
+      <category term="编程技术" scheme="http://channingsun.github.io/categories/%E7%BC%96%E7%A8%8B%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Android" scheme="http://channingsun.github.io/tags/Android/"/>
+    
+      <category term="Proguard" scheme="http://channingsun.github.io/tags/Proguard/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>给博客添加Timeline</title>
+    <link href="http://channingsun.github.io/2016/05/10/20160510_%E7%BB%99%E5%8D%9A%E5%AE%A2%E6%B7%BB%E5%8A%A0Timeline/"/>
+    <id>http://channingsun.github.io/2016/05/10/20160510_给博客添加Timeline/</id>
+    <published>2016-05-09T16:00:00.000Z</published>
+    <updated>2016-07-14T15:17:33.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>之前兴冲冲的想自己写个博客，然后没事儿写点儿东西放上面（虽然没人看😂）。但是还是动力不足，总给自己找借口，而且写东西确实是件比较费神的事儿。</p>
+<p>而我平时又不想有事儿没事在社交网络（QQ空间，朋友圈，微博等）上面发些心情什么的，总觉得太矫情，琐碎。因此就想在这片属于自己的地方，弄个可以随便写点什么的地方。于是想到之前在<a href="https://blog.jamespan.me/" target="_blank" rel="external">@JamesPan</a>那里看到的一个Timeline的页面（他把链接从首页去掉了，但其实链接还在，可能他不希望这些太直接的展示出来吧，所以这里也就不放链接了），总之，我决定模仿（读书人的事儿，能叫抄么）下来了。</p>
+<p>其实之前对hexo也只停留在会看教程使用的程度，对其原理、技术是一点儿都不了解的，甚至对网页我也不是很了解，所以在这里花了一些时间，大概两个小时吧。但是最后回头再看，其实挺简单。</p>
+<p>首先，我在看JamesPan的github上看到其Timeline页面的markdown源码是这样的：</p>
+<figure class="highlight django"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="xml"></span><span class="template-tag">&#123;% <span class="name">mood</span> 2015-01-24 23:55:21 fa-book %&#125;</span><span class="xml"> 搞到了找了好久的《人本界面》，万能的淘宝！ </span><span class="template-tag">&#123;% <span class="name">endmood</span> %&#125;</span><span class="xml"></span></div><div class="line"></div><div class="line"><span class="template-tag">&#123;% <span class="name">mood</span> 2015-01-23 18:38:26 fa-code %&#125;</span><span class="xml"> 地址收缩算法！ </span><span class="template-tag">&#123;% <span class="name">endmood</span> %&#125;</span><span class="xml"></span></div></pre></td></tr></table></figure>
+<p>看似是用这个什么mode将一条状态包裹起来，然后他在评论中回复别人说只是用了blockquote标签而已。然后就在他的代码里全局搜索mood、blockquote，找到了一个叫Timeline.js的东西，内容如下：</p>
+<figure class="highlight qml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">hexo.extend.tag.register(<span class="string">'mood'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">args, content</span>)</span>&#123;</div><div class="line"></div><div class="line">	<span class="built_in">date</span> = args[<span class="number">0</span>]</div><div class="line">	time = args[<span class="number">1</span>]</div><div class="line">	logo = args[<span class="number">2</span>]</div><div class="line">	<span class="built_in">var</span> result = <span class="string">''</span>;</div><div class="line"></div><div class="line">	result += <span class="string">'&lt;blockquote&gt;'</span>;</div><div class="line">	logo = <span class="string">'&lt;span class="fa-stack fa-lg"&gt;&lt;i class="fa '</span> + logo + <span class="string">' fa-stack-1x"&gt;&lt;/i&gt;&lt;/span&gt;'</span>;</div><div class="line">	result += hexo.render.renderSync(&#123;<span class="attribute">text</span>: logo + content, <span class="attribute">engine</span>: <span class="string">'markdown'</span>&#125;);</div><div class="line">	footer = <span class="string">'&lt;span&gt;'</span> + <span class="built_in">date</span> + <span class="string">' '</span> + time + <span class="string">'&lt;/span&gt;'</span></div><div class="line">	result += <span class="string">'&lt;footer&gt;'</span> + footer + <span class="string">'&lt;/footer&gt;'</span>;</div><div class="line">	result += <span class="string">'&lt;/blockquote&gt;'</span>;</div><div class="line"></div><div class="line">	<span class="keyword">return</span> result;</div><div class="line">&#125;, &#123;<span class="attribute">ends</span>: <span class="literal">true</span>&#125;);</div></pre></td></tr></table></figure>
+<p>看来就是在这里告诉hexo，将mode标签转换成blockquote标签。</p>
+<p>然而这个js拿到后放到哪里呢。我一开始是和我的主题里其它的js文件放在一起，然而发现然并卵。hexo g的时候还是会报错。后来看hexo的<a href="https://hexo.io/docs/plugins.html#Script" target="_blank" rel="external">官方说明</a>才知道，要放在主题文件夹的根目录下的scripts文件夹下，如下图：</p>
+<p><img src="/img/给博客添加Timeline1.png" alt="附件1"></p>
+<p>即可加载此脚本。然后即可编译、部署。</p>
+<p>然而生成的界面的样式与他的样式稍微又些难看，如下：</p>
+<p><img src="/img/给博客添加Timeline2.png" alt="附件2"></p>
+<p>我想肯定是css的问题，于是还是在他的代码里搜，找到了他的css：</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">blockquote</span></div><div class="line">  <span class="attribute">background</span> <span class="selector-id">#f9f9f9</span></div><div class="line">  <span class="attribute">quotes</span> "\201C""\201D""\2018""\2019"</div><div class="line">  <span class="attribute">border-left</span> <span class="selector-class">.2em</span> solid <span class="attribute">color</span>-<span class="attribute">border</span></div><div class="line">  <span class="attribute">margin</span> 20px 0px</div><div class="line">  <span class="attribute">padding</span> 0px 30px</div><div class="line">  <span class="attribute">line-height</span> <span class="attribute">line-height</span></div><div class="line">  <span class="attribute">font-size</span> <span class="attribute">font-size</span></div><div class="line">  <span class="selector-tag">footer</span></div><div class="line">    <span class="attribute">background</span> <span class="attribute">color</span>-<span class="selector-tag">section</span></div><div class="line">    <span class="attribute">padding</span> 0</div><div class="line">    <span class="attribute">margin</span> 0</div><div class="line">    <span class="attribute">font-size</span> 80%</div><div class="line">    <span class="attribute">line-height</span> 1em</div><div class="line">  <span class="selector-tag">cite</span></div><div class="line">    <span class="attribute">font-style</span> italic</div><div class="line">    <span class="attribute">padding-left</span> 0<span class="selector-class">.5em</span></div></pre></td></tr></table></figure>
+<p>然而这个玩意儿是用什么stylus的格式写的。然后我稍微科普了一下，神马css、scss、sass、stylus，一大堆的语法标准，真是烦，那些程序员是不是都吃饱了撑的，造了一个又一个相似的轮子。</p>
+<p>然后又花费了一些时间弄明白这玩意儿并把它转换成了我的主题用的scss：</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">blockquote</span>&#123;</div><div class="line">  <span class="attribute">background</span>: <span class="number">#f9f9f9</span>;</div><div class="line">  <span class="attribute">quotes</span>: <span class="string">"\201C"</span><span class="string">"\201D"</span><span class="string">"\2018"</span><span class="string">"\2019"</span>;</div><div class="line">  <span class="attribute">border-left</span>: .<span class="number">2em</span> solid color-border;</div><div class="line">  <span class="attribute">margin</span>: <span class="number">20px</span> <span class="number">0px</span>;</div><div class="line">  <span class="attribute">padding</span>: <span class="number">0px</span> <span class="number">30px</span>;</div><div class="line">  &amp;:before&#123;</div><div class="line">    <span class="attribute">content</span>: none;</div><div class="line">  &#125;</div><div class="line">  &amp;:after&#123;</div><div class="line">    <span class="attribute">content</span>: none;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>其中before、after的content属性都设为none是不想那个难看的引号图标出现。结果如下：</p>
+<p><img src="/img/给博客添加Timeline3.png" alt="附件3"></p>
+<p>到这里就差不多了。哦，还有每条状态前面的那个小图标，挺有趣。在这里：<a href="https://fortawesome.github.io/Font-Awesome/icons/" target="_blank" rel="external">Font Awesome Icons</a></p>
+<p>后记：感觉稍微懂了一些了不得的知识，继续走这条路下去，或许会能够与更多的人谈笑风生了吧2333。</p>
+<p>EOF</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;之前兴冲冲的想自己写个博客，然后没事儿写点儿东西放上面（虽然没人看😂）。但是还是动力不足，总给自己找借口，而且写东西确实是件比较费神的事儿。&lt;/p&gt;
+&lt;p&gt;而我平时又不想有事儿没事在社交网络（QQ空间，朋友圈，微博等）上面发些心情什么的，总觉得太矫情，琐碎。因此就想在这片
+    
+    </summary>
+    
+      <category term="编程技术" scheme="http://channingsun.github.io/categories/%E7%BC%96%E7%A8%8B%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Hexo" scheme="http://channingsun.github.io/tags/Hexo/"/>
+    
+      <category term="CSS" scheme="http://channingsun.github.io/tags/CSS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java多线程学习笔记－基础篇</title>
+    <link href="http://channingsun.github.io/2016/04/20/20160420_Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%8D%E5%9F%BA%E7%A1%80%E7%AF%87/"/>
+    <id>http://channingsun.github.io/2016/04/20/20160420_Java多线程学习笔记－基础篇/</id>
+    <published>2016-04-19T16:00:00.000Z</published>
+    <updated>2016-07-14T15:17:31.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>阅读<a href="http://www.cnblogs.com/skywang12345/" target="_blank" rel="external">skywang12345</a>的<a href="http://www.cnblogs.com/skywang12345/p/java_threads_category.html" target="_blank" rel="external">Java多线程系列</a>的笔记与总结。</p>
+<p>记录一下，防止读过就忘了。下面大部分都是摘自原博。</p>
+<h2 id="1-线程的五种状态"><a href="#1-线程的五种状态" class="headerlink" title="1.线程的五种状态"></a>1.线程的五种状态</h2><ol>
+<li><p>新建状态(New) : 线程对象被创建后，就进入了新建状态。例如，Thread thread = new Thread()。</p>
+</li>
+<li><p>就绪状态(Runnable) : 也被称为“可执行状态”。线程对象被创建后，其它线程调用了该对象的start()方法，从而来启动该线程。例如，thread.start()。处于就绪状态的线程，随时可能被CPU调度执行。</p>
+</li>
+<li><p>运行状态(Running) : 线程获取CPU权限进行执行。需要注意的是，线程只能从就绪状态进入到运行状态。</p>
+</li>
+<li><p>阻塞状态(Blocked)  : 阻塞状态是线程因为某种原因放弃CPU使用权，暂时停止运行。直到线程进入就绪状态，才有机会转到运行状态。阻塞的情况分三种：</p>
+<p> (01) 等待阻塞 – 通过调用线程的wait()方法，让线程等待某工作的完成。</p>
+<p> (02) 同步阻塞 – 线程在获取synchronized同步锁失败(因为锁被其它线程所占用)，它会进入同步阻塞状态。</p>
+<p> (03) 其他阻塞 – 通过调用线程的sleep()或join()或发出了I/O请求时，线程会进入到阻塞状态。当sleep()状态超时、join()等待线程终止或者超时、或者I/O处理完毕时，线程重新转入就绪状态。</p>
+</li>
+<li><p>死亡状态(Dead)    : 线程执行完了或者因异常退出了run()方法，该线程结束生命周期。</p>
+</li>
+</ol>
+<h2 id="2-Thread与Runnable"><a href="#2-Thread与Runnable" class="headerlink" title="2.Thread与Runnable"></a>2.Thread与Runnable</h2><ul>
+<li>Runnable 是一个接口，该接口中只包含了一个run()方法。它的定义如下：</li>
+</ul>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">Runnable</span> &#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">run</span>(<span class="params"></span>)</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>Thread 是一个类。Thread本身就实现了Runnable接口。它的声明如下：</li>
+</ul>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Thread</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;&#125;</div></pre></td></tr></table></figure>
+<p>此处参见Thread类的源代码，很清楚。</p>
+<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> Runnable <span class="keyword">target</span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">Thread</span><span class="params">(Runnable <span class="keyword">target</span>)</span> </span>&#123;</div><div class="line">	init(<span class="keyword">null</span>, <span class="keyword">target</span>, <span class="string">"Thread-"</span> + nextThreadNum(), <span class="number">0</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (<span class="keyword">target</span> != <span class="keyword">null</span>) &#123;</div><div class="line">        <span class="keyword">target</span>.run();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="3-start-和-run-的区别"><a href="#3-start-和-run-的区别" class="headerlink" title="3.start() 和 run()的区别"></a>3.start() 和 run()的区别</h2><ul>
+<li><p>start() : 它的作用是启动一个新线程，新线程会执行相应的run()方法。start()不能被重复调用。</p>
+</li>
+<li><p>run()   : run()就和普通的成员方法一样，可以被重复调用。单独调用run()的话，会在当前线程中执行run()，而并不会启动新线程！</p>
+</li>
+</ul>
+<p>原理还是看上面的java源代码。</p>
+<p>测试代码：</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Demo</span> &#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span>(<span class="params">String[] args</span>) </span>&#123;</div><div class="line">        Thread mythread = <span class="keyword">new</span> MyThread2(<span class="string">"mythread"</span>);</div><div class="line"></div><div class="line">        System.<span class="keyword">out</span>.println(Thread.currentThread().getName() + <span class="string">" call mythread.run()"</span>);</div><div class="line">        mythread.run();</div><div class="line"></div><div class="line">        System.<span class="keyword">out</span>.println(Thread.currentThread().getName() + <span class="string">" call mythread.start()"</span>);</div><div class="line">        mythread.start();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">class</span> <span class="title">MyThread2</span> <span class="title">extends</span> <span class="title">Thread</span> &#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyThread2</span>(<span class="params">String name</span>) </span>&#123;</div><div class="line">        super(name);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        System.<span class="keyword">out</span>.println(Thread.currentThread().getName() + <span class="string">" is running"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">main <span class="keyword">call</span> mythread.run()</div><div class="line"><span class="keyword">main</span> <span class="keyword">is</span> running</div><div class="line"><span class="keyword">main</span> <span class="keyword">call</span> mythread.start()</div><div class="line">mythread <span class="keyword">is</span> running</div></pre></td></tr></table></figure>
+<h2 id="4-synchronized关键字"><a href="#4-synchronized关键字" class="headerlink" title="4.synchronized关键字"></a>4.synchronized关键字</h2><h3 id="4-1-同步锁是依赖于对象而存在"><a href="#4-1-同步锁是依赖于对象而存在" class="headerlink" title="4.1.同步锁是依赖于对象而存在"></a>4.1.同步锁是依赖于对象而存在</h3><p>在java中，每一个对象有且仅有一个同步锁。当我们调用某对象的synchronized方法时，就获取了该对象的同步锁。别的线程此时若企图获取该同步锁，就会失败并且需要等待。</p>
+<p>我们将synchronized的基本规则总结为下面3条，并通过实例对它们进行说明。</p>
+<ol>
+<li><p>当一个线程访问“某对象”的“synchronized方法”或者“synchronized代码块”时，其他线程对“该对象”的该“synchronized方法”或者“synchronized代码块”的访问将被阻塞。</p>
+</li>
+<li><p>当一个线程访问“某对象”的“synchronized方法”或者“synchronized代码块”时，其他线程仍然可以访问“该对象”的非同步代码块。</p>
+</li>
+<li><p>当一个线程访问“某对象”的“synchronized方法”或者“synchronized代码块”时，其他线程对“该对象”的其他的“synchronized方法”或者“synchronized代码块”的访问将被阻塞。</p>
+</li>
+</ol>
+<p>示例代码1:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyRunable</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</div><div class="line">    </div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">synchronized</span>(<span class="keyword">this</span>) &#123;</div><div class="line">            <span class="keyword">try</span> &#123;  </div><div class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</div><div class="line">                    Thread.sleep(<span class="number">100</span>); <span class="comment">// 休眠100ms</span></div><div class="line">                    System.out.println(Thread.currentThread().getName() + <span class="string">" loop "</span> + i);  </div><div class="line">                &#125;</div><div class="line">            &#125; <span class="keyword">catch</span> (InterruptedException ie) &#123;  </div><div class="line">            &#125;</div><div class="line">        &#125;  </div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo1_1</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;  </div><div class="line">        Runnable demo = <span class="keyword">new</span> MyRunable();     <span class="comment">// 新建“Runnable对象”</span></div><div class="line"></div><div class="line">        Thread t1 = <span class="keyword">new</span> Thread(demo, <span class="string">"t1"</span>);  <span class="comment">// 新建“线程t1”, t1是基于demo这个Runnable对象</span></div><div class="line">        Thread t2 = <span class="keyword">new</span> Thread(demo, <span class="string">"t2"</span>);  <span class="comment">// 新建“线程t2”, t2是基于demo这个Runnable对象</span></div><div class="line">        t1.start();                          <span class="comment">// 启动“线程t1”</span></div><div class="line">        t2.start();                          <span class="comment">// 启动“线程t2” </span></div><div class="line">    &#125; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>代码1运行结果：</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">t1 <span class="keyword">loop</span> <span class="number">0</span></div><div class="line">t1 <span class="keyword">loop</span> <span class="number">1</span></div><div class="line">t1 <span class="keyword">loop</span> <span class="number">2</span></div><div class="line">t1 <span class="keyword">loop</span> <span class="number">3</span></div><div class="line">t1 <span class="keyword">loop</span> <span class="number">4</span></div><div class="line">t2 <span class="keyword">loop</span> <span class="number">0</span></div><div class="line">t2 <span class="keyword">loop</span> <span class="number">1</span></div><div class="line">t2 <span class="keyword">loop</span> <span class="number">2</span></div><div class="line">t2 <span class="keyword">loop</span> <span class="number">3</span></div><div class="line">t2 <span class="keyword">loop</span> <span class="number">4</span></div></pre></td></tr></table></figure>
+<p>示例代码2:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyThread</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyThread</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(name);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">synchronized</span>(<span class="keyword">this</span>) &#123;</div><div class="line">            <span class="keyword">try</span> &#123;  </div><div class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</div><div class="line">                    Thread.sleep(<span class="number">100</span>); <span class="comment">// 休眠100ms</span></div><div class="line">                    System.out.println(Thread.currentThread().getName() + <span class="string">" loop "</span> + i);  </div><div class="line">                &#125;</div><div class="line">            &#125; <span class="keyword">catch</span> (InterruptedException ie) &#123;  </div><div class="line">            &#125;</div><div class="line">        &#125;  </div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo1_2</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;  </div><div class="line">        Thread t1 = <span class="keyword">new</span> MyThread(<span class="string">"t1"</span>);  <span class="comment">// 新建“线程t1”</span></div><div class="line">        Thread t2 = <span class="keyword">new</span> MyThread(<span class="string">"t2"</span>);  <span class="comment">// 新建“线程t2”</span></div><div class="line">        t1.start();                          <span class="comment">// 启动“线程t1”</span></div><div class="line">        t2.start();                          <span class="comment">// 启动“线程t2” </span></div><div class="line">    &#125; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>代码2运行结果：</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">t1 <span class="keyword">loop</span> <span class="number">0</span></div><div class="line">t2 <span class="keyword">loop</span> <span class="number">0</span></div><div class="line">t1 <span class="keyword">loop</span> <span class="number">1</span></div><div class="line">t2 <span class="keyword">loop</span> <span class="number">1</span></div><div class="line">t1 <span class="keyword">loop</span> <span class="number">2</span></div><div class="line">t2 <span class="keyword">loop</span> <span class="number">2</span></div><div class="line">t1 <span class="keyword">loop</span> <span class="number">3</span></div><div class="line">t2 <span class="keyword">loop</span> <span class="number">3</span></div><div class="line">t1 <span class="keyword">loop</span> <span class="number">4</span></div><div class="line">t2 <span class="keyword">loop</span> <span class="number">4</span></div></pre></td></tr></table></figure>
+<p>区别在于，示例1的两个线程都访问的是demo这个对象的锁，示例2的两个线程访问的是t1,t2各自的锁。</p>
+<p><strong>一定要搞清锁是谁的锁</strong>，这一点明白之后上面总结的所谓123条完全可以不看。</p>
+<h3 id="4-2-synchronized方法-和-synchronized代码块"><a href="#4-2-synchronized方法-和-synchronized代码块" class="headerlink" title="4.2.synchronized方法 和 synchronized代码块"></a>4.2.synchronized方法 和 synchronized代码块</h3><p>“synchronized方法”是用synchronized修饰方法，而 “synchronized代码块”则是用synchronized修饰代码块。</p>
+<p>synchronized方法示例：</p>
+<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="function"><span class="keyword">void</span> <span class="title">foo1</span><span class="params">()</span> </span>&#123;</div><div class="line">    System.out.println(<span class="string">"synchronized methoed"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>synchronized代码块：</p>
+<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">foo2</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">synchronized</span> (<span class="keyword">this</span>) &#123;</div><div class="line">        System.out.println(<span class="string">"synchronized methoed"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>synchronized代码块中的this是指当前对象。也可以将this替换成其他对象，例如将this替换成obj，则foo2()在执行synchronized(obj)时就获取的是obj的同步锁。</p>
+<p><strong>synchronized代码块可以更精确的控制冲突限制访问区域，效率更高</strong></p>
+<h3 id="4-3-实例锁-和-全局锁"><a href="#4-3-实例锁-和-全局锁" class="headerlink" title="4.3.实例锁 和 全局锁"></a>4.3.实例锁 和 全局锁</h3><ul>
+<li><p>实例锁 ： 锁在某一个实例对象上。如果该类是单例，那么该锁也具有全局锁的概念。</p>
+<pre><code>实例锁对应的就是synchronized关键字。
+</code></pre></li>
+<li><p>全局锁 ： 该锁针对的是类，无论实例多少个对象，那么线程都共享该锁。</p>
+<pre><code>全局锁对应的就是static synchronized（或者是锁在该类的class或者classloader对象上）。
+</code></pre></li>
+</ul>
+<p>示例代码3:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// LockTest3.java的源码</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Something</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">cSyncA</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">try</span> &#123;  </div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</div><div class="line">                Thread.sleep(<span class="number">100</span>); <span class="comment">// 休眠100ms</span></div><div class="line">                System.out.println(Thread.currentThread().getName()+<span class="string">" : cSyncA"</span>);</div><div class="line">            &#125; </div><div class="line">        &#125;<span class="keyword">catch</span> (InterruptedException ie) &#123;  </div><div class="line">        &#125;  </div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">cSyncB</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">try</span> &#123;  </div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</div><div class="line">                Thread.sleep(<span class="number">100</span>); <span class="comment">// 休眠100ms</span></div><div class="line">                System.out.println(Thread.currentThread().getName()+<span class="string">" : cSyncB"</span>);</div><div class="line">            &#125; </div><div class="line">        &#125;<span class="keyword">catch</span> (InterruptedException ie) &#123;  </div><div class="line">        &#125;  </div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LockTest3</span> </span>&#123;</div><div class="line"></div><div class="line">    Something x = <span class="keyword">new</span> Something();</div><div class="line">    Something y = <span class="keyword">new</span> Something();</div><div class="line"></div><div class="line">    <span class="comment">// 比较(03) x.cSyncA()与y.cSyncB()</span></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">test3</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="comment">// 新建t31, t31会调用 x.isSyncA()</span></div><div class="line">        Thread t31 = <span class="keyword">new</span> Thread(</div><div class="line">                <span class="keyword">new</span> Runnable() &#123;</div><div class="line">                    <span class="meta">@Override</span></div><div class="line">                    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">                        x.cSyncA();</div><div class="line">                    &#125;</div><div class="line">                &#125;, <span class="string">"t31"</span>);</div><div class="line"></div><div class="line">        <span class="comment">// 新建t32, t32会调用 x.isSyncB()</span></div><div class="line">        Thread t32 = <span class="keyword">new</span> Thread(</div><div class="line">                <span class="keyword">new</span> Runnable() &#123;</div><div class="line">                    <span class="meta">@Override</span></div><div class="line">                    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">                        y.cSyncB();</div><div class="line">                    &#125;</div><div class="line">                &#125;, <span class="string">"t32"</span>);  </div><div class="line"></div><div class="line"></div><div class="line">        t31.start();  <span class="comment">// 启动t31</span></div><div class="line">        t32.start();  <span class="comment">// 启动t32</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        LockTest3 demo = <span class="keyword">new</span> LockTest3();</div><div class="line"></div><div class="line">        demo.test3();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>代码3结果：</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">t31 : <span class="type">cSyncA</span></div><div class="line">t31 : <span class="type">cSyncA</span></div><div class="line">t31 : <span class="type">cSyncA</span></div><div class="line">t31 : <span class="type">cSyncA</span></div><div class="line">t31 : <span class="type">cSyncA</span></div><div class="line">t32 : <span class="type">cSyncB</span></div><div class="line">t32 : <span class="type">cSyncB</span></div><div class="line">t32 : <span class="type">cSyncB</span></div><div class="line">t32 : <span class="type">cSyncB</span></div><div class="line">t32 : <span class="type">cSyncB</span></div></pre></td></tr></table></figure>
+<p>示例代码4:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// LockTest4.java的源码</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Something</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">isSyncA</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">try</span> &#123;  </div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</div><div class="line">                Thread.sleep(<span class="number">100</span>); <span class="comment">// 休眠100ms</span></div><div class="line">                System.out.println(Thread.currentThread().getName()+<span class="string">" : isSyncA"</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;<span class="keyword">catch</span> (InterruptedException ie) &#123;  </div><div class="line">        &#125;  </div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">cSyncA</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">try</span> &#123;  </div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</div><div class="line">                Thread.sleep(<span class="number">100</span>); <span class="comment">// 休眠100ms</span></div><div class="line">                System.out.println(Thread.currentThread().getName()+<span class="string">" : cSyncA"</span>);</div><div class="line">            &#125; </div><div class="line">        &#125;<span class="keyword">catch</span> (InterruptedException ie) &#123;  </div><div class="line">        &#125;  </div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LockTest4</span> </span>&#123;</div><div class="line"></div><div class="line">    Something x = <span class="keyword">new</span> Something();</div><div class="line"></div><div class="line">    <span class="comment">// 比较(04) x.isSyncA()与Something.cSyncA()</span></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">test4</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="comment">// 新建t41, t41会调用 x.isSyncA()</span></div><div class="line">        Thread t41 = <span class="keyword">new</span> Thread(</div><div class="line">                <span class="keyword">new</span> Runnable() &#123;</div><div class="line">                    <span class="meta">@Override</span></div><div class="line">                    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">                        x.isSyncA();</div><div class="line">                    &#125;</div><div class="line">                &#125;, <span class="string">"t41"</span>);</div><div class="line"></div><div class="line">        <span class="comment">// 新建t42, t42会调用 x.isSyncB()</span></div><div class="line">        Thread t42 = <span class="keyword">new</span> Thread(</div><div class="line">                <span class="keyword">new</span> Runnable() &#123;</div><div class="line">                    <span class="meta">@Override</span></div><div class="line">                    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">                        x.cSyncA();</div><div class="line">                    &#125;</div><div class="line">                &#125;, <span class="string">"t42"</span>);  </div><div class="line"></div><div class="line"></div><div class="line">        t41.start();  <span class="comment">// 启动t41</span></div><div class="line">        t42.start();  <span class="comment">// 启动t42</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        LockTest4 demo = <span class="keyword">new</span> LockTest4();</div><div class="line"></div><div class="line">        demo.test4();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>代码4结果：</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">t41 : <span class="type">isSyncA</span></div><div class="line">t42 : <span class="type">cSyncA</span></div><div class="line">t41 : <span class="type">isSyncA</span></div><div class="line">t42 : <span class="type">cSyncA</span></div><div class="line">t41 : <span class="type">isSyncA</span></div><div class="line">t42 : <span class="type">cSyncA</span></div><div class="line">t41 : <span class="type">isSyncA</span></div><div class="line">t42 : <span class="type">cSyncA</span></div><div class="line">t41 : <span class="type">isSyncA</span></div><div class="line">t42 : <span class="type">cSyncA</span></div></pre></td></tr></table></figure>
+<p>示例3不能被同时访问。因为cSyncA()和cSyncB()都是static类型，x.cSyncA()相当于Something.isSyncA()，y.cSyncB()相当于Something.isSyncB()，因此它们共用一个同步锁，不能被同时访问。</p>
+<p>示例4可以被同时访问。因为isSyncA()是实例方法，x.isSyncA()使用的是对象x的锁；而cSyncA()是静态方法，Something.cSyncA()可以理解对使用的是“类的锁”。因此，它们是可以被同时访问的。</p>
+<h2 id="5-线程等待与唤醒"><a href="#5-线程等待与唤醒" class="headerlink" title="5.线程等待与唤醒"></a>5.线程等待与唤醒</h2><h3 id="5-1-wait-notify-notifyAll-等方法介绍"><a href="#5-1-wait-notify-notifyAll-等方法介绍" class="headerlink" title="5.1.wait(), notify(), notifyAll()等方法介绍"></a>5.1.wait(), notify(), notifyAll()等方法介绍</h3><p>在Object.java中，定义了wait(), notify()和notifyAll()等接口。wait()的作用是让<strong>当前线程</strong>进入等待状态，同时，wait()也会让<strong>当前线程</strong>释放它所持有的锁。而notify()和notifyAll()的作用，则是唤醒<strong>当前对象</strong>上的等待线程；notify()是唤醒单个线程，而notifyAll()是唤醒所有的线程。</p>
+<h3 id="5-2-wait-和notify-示例"><a href="#5-2-wait-和notify-示例" class="headerlink" title="5.2.wait()和notify()示例"></a>5.2.wait()和notify()示例</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// WaitTest.java的源码</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ThreadA</span> <span class="keyword">extends</span> <span class="title">Thread</span></span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ThreadA</span><span class="params">(String name)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(name);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">synchronized</span> (<span class="keyword">this</span>) &#123;</div><div class="line">            System.out.println(Thread.currentThread().getName()+<span class="string">" call notify()"</span>);</div><div class="line">            <span class="comment">// 唤醒当前的wait线程</span></div><div class="line">            notify();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WaitTest</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line"></div><div class="line">        ThreadA t1 = <span class="keyword">new</span> ThreadA(<span class="string">"t1"</span>);</div><div class="line"></div><div class="line">        <span class="keyword">synchronized</span>(t1) &#123;</div><div class="line">            <span class="keyword">try</span> &#123;</div><div class="line">                <span class="comment">// 启动“线程t1”</span></div><div class="line">                System.out.println(Thread.currentThread().getName()+<span class="string">" start t1"</span>);</div><div class="line">                t1.start();</div><div class="line"></div><div class="line">                <span class="comment">// 主线程等待t1通过notify()唤醒。</span></div><div class="line">                System.out.println(Thread.currentThread().getName()+<span class="string">" wait()"</span>);</div><div class="line">                t1.wait();</div><div class="line"></div><div class="line">                System.out.println(Thread.currentThread().getName()+<span class="string">" continue"</span>);</div><div class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">                e.printStackTrace();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>运行结果:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">main <span class="keyword">start</span> t1</div><div class="line"><span class="keyword">main</span> <span class="keyword">wait</span>()</div><div class="line">t1 <span class="keyword">call</span> notify()</div><div class="line"><span class="keyword">main</span> continue</div></pre></td></tr></table></figure>
+<p>结果说明：<br>如下图，说明了“主线程”和“线程t1”的流程。</p>
+<p>(01) 注意，图中”主线程” 代表“主线程main”。”线程t1” 代表WaitTest中启动的“线程t1”。 而“锁” 代表“t1这个对象的同步锁”。</p>
+<p>(02) “主线程”通过 new ThreadA(“t1”) 新建“线程t1”。随后通过synchronized(t1)获取“t1对象的同步锁”。然后调用t1.start()启动“线程t1”。</p>
+<p>(03) “主线程”执行t1.wait() 释放“t1对象的锁”并且进入“等待(阻塞)状态”。等待t1对象上的线程通过notify() 或 notifyAll()将其唤醒。</p>
+<p>(04) “线程t1”运行之后，通过synchronized(this)获取“当前对象的锁”；接着调用notify()唤醒“当前对象上的等待线程”，也就是唤醒“主线程”。</p>
+<p>(05) “线程t1”运行完毕之后，释放“当前对象的锁”。紧接着，“主线程”获取“t1对象的锁”，然后接着运行。</p>
+<p><img src="/img/Java多线程学习笔记－基础篇1.png" alt="附件1"></p>
+<p><strong>注意</strong>：jdk的解释中，说wait()的作用是让“当前线程”等待，而“当前线程”是指正在cpu上运行的线程！</p>
+<p>这也意味着，虽然t1.wait()是通过“线程t1”调用的wait()方法，但是调用t1.wait()的地方是在“主线程main”中。而主线程必须是“当前线程”，也就是运行状态，才可以执行t1.wait()。所以，此时的“当前线程”是“主线程main”！因此，t1.wait()是让“主线程”等待，而不是“线程t1”！</p>
+<h3 id="4-3-wait-和-notifyAll-示例"><a href="#4-3-wait-和-notifyAll-示例" class="headerlink" title="4.3.wait() 和 notifyAll()示例"></a>4.3.wait() 和 notifyAll()示例</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NotifyAllTest</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Object obj = <span class="keyword">new</span> Object();</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line"></div><div class="line">        ThreadA t1 = <span class="keyword">new</span> ThreadA(<span class="string">"t1"</span>);</div><div class="line">        ThreadA t2 = <span class="keyword">new</span> ThreadA(<span class="string">"t2"</span>);</div><div class="line">        ThreadA t3 = <span class="keyword">new</span> ThreadA(<span class="string">"t3"</span>);</div><div class="line">        t1.start();</div><div class="line">        t2.start();</div><div class="line">        t3.start();</div><div class="line"></div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            System.out.println(Thread.currentThread().getName()+<span class="string">" sleep(3000)"</span>);</div><div class="line">            Thread.sleep(<span class="number">3000</span>);</div><div class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">synchronized</span>(obj) &#123;</div><div class="line">            <span class="comment">// 主线程等待唤醒。</span></div><div class="line">            System.out.println(Thread.currentThread().getName()+<span class="string">" notifyAll()"</span>);</div><div class="line">            obj.notifyAll();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadA</span> <span class="keyword">extends</span> <span class="title">Thread</span></span>&#123;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">ThreadA</span><span class="params">(String name)</span></span>&#123;</div><div class="line">            <span class="keyword">super</span>(name);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="keyword">synchronized</span> (obj) &#123;</div><div class="line">                <span class="keyword">try</span> &#123;</div><div class="line">                    <span class="comment">// 打印输出结果</span></div><div class="line">                    System.out.println(Thread.currentThread().getName() + <span class="string">" wait"</span>);</div><div class="line"></div><div class="line">                    <span class="comment">// 唤醒当前的wait线程</span></div><div class="line">                    obj.wait();</div><div class="line"></div><div class="line">                    <span class="comment">// 打印输出结果</span></div><div class="line">                    System.out.println(Thread.currentThread().getName() + <span class="string">" continue"</span>);</div><div class="line">                &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">                    e.printStackTrace();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">t1</span> <span class="keyword">wait</span></div><div class="line"><span class="built_in">t3</span> <span class="keyword">wait</span></div><div class="line"><span class="built_in">t2</span> <span class="keyword">wait</span></div><div class="line">main sleep(<span class="number">3000</span>)</div><div class="line">main notifyAll()</div><div class="line"><span class="built_in">t2</span> continue</div><div class="line"><span class="built_in">t3</span> continue</div><div class="line"><span class="built_in">t1</span> continue</div></pre></td></tr></table></figure>
+<p>流程图如下：</p>
+<p><img src="/img/Java多线程学习笔记－基础篇2.png" alt="附件2"></p>
+<h2 id="6-线程让步yield"><a href="#6-线程让步yield" class="headerlink" title="6.线程让步yield()"></a>6.线程让步yield()</h2><p>yield()的作用是让步。它能让当前线程由“运行状态”进入到“就绪状态”，从而让其它具有相同优先级的等待线程获取执行权；但是，并不能保证在当前线程调用yield()之后，其它具有相同优先级的线程就一定能获得执行权；也有可能是当前线程又进入到“运行状态”继续运行！</p>
+<p>例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// YieldTest.java的源码</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ThreadA</span> <span class="keyword">extends</span> <span class="title">Thread</span></span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ThreadA</span><span class="params">(String name)</span></span>&#123; </div><div class="line">        <span class="keyword">super</span>(name); </div><div class="line">    &#125; </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123; </div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i &lt;<span class="number">10</span>; i++)&#123; </div><div class="line">            System.out.printf(<span class="string">"%s [%d]:%d\n"</span>, <span class="keyword">this</span>.getName(), <span class="keyword">this</span>.getPriority(), i); </div><div class="line">            <span class="comment">// i整除4时，调用yield</span></div><div class="line">            <span class="keyword">if</span> (i%<span class="number">4</span> == <span class="number">0</span>)</div><div class="line">                Thread.yield();</div><div class="line">        &#125; </div><div class="line">    &#125; </div><div class="line">&#125; </div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">YieldTest</span></span>&#123; </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123; </div><div class="line">        ThreadA t1 = <span class="keyword">new</span> ThreadA(<span class="string">"t1"</span>); </div><div class="line">        ThreadA t2 = <span class="keyword">new</span> ThreadA(<span class="string">"t2"</span>); </div><div class="line">        t1.start(); </div><div class="line">        t2.start();</div><div class="line">    &#125; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>理论上的结果：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">t1</span> <span class="selector-attr">[5]</span><span class="selector-pseudo">:0</span></div><div class="line"><span class="selector-tag">t2</span> <span class="selector-attr">[5]</span><span class="selector-pseudo">:0</span></div><div class="line"><span class="selector-tag">t1</span> <span class="selector-attr">[5]</span><span class="selector-pseudo">:1</span></div><div class="line"><span class="selector-tag">t1</span> <span class="selector-attr">[5]</span><span class="selector-pseudo">:2</span></div><div class="line"><span class="selector-tag">t1</span> <span class="selector-attr">[5]</span><span class="selector-pseudo">:3</span></div><div class="line"><span class="selector-tag">t1</span> <span class="selector-attr">[5]</span><span class="selector-pseudo">:4</span></div><div class="line"><span class="selector-tag">t2</span> <span class="selector-attr">[5]</span><span class="selector-pseudo">:1</span></div><div class="line"><span class="selector-tag">t2</span> <span class="selector-attr">[5]</span><span class="selector-pseudo">:2</span></div><div class="line"><span class="selector-tag">t2</span> <span class="selector-attr">[5]</span><span class="selector-pseudo">:3</span></div><div class="line"><span class="selector-tag">t2</span> <span class="selector-attr">[5]</span><span class="selector-pseudo">:4</span></div><div class="line"><span class="selector-tag">t1</span> <span class="selector-attr">[5]</span><span class="selector-pseudo">:5</span></div><div class="line"><span class="selector-tag">t1</span> <span class="selector-attr">[5]</span><span class="selector-pseudo">:6</span></div><div class="line"><span class="selector-tag">t1</span> <span class="selector-attr">[5]</span><span class="selector-pseudo">:7</span></div><div class="line"><span class="selector-tag">t1</span> <span class="selector-attr">[5]</span><span class="selector-pseudo">:8</span></div><div class="line"><span class="selector-tag">t2</span> <span class="selector-attr">[5]</span><span class="selector-pseudo">:5</span></div><div class="line"><span class="selector-tag">t2</span> <span class="selector-attr">[5]</span><span class="selector-pseudo">:6</span></div><div class="line"><span class="selector-tag">t2</span> <span class="selector-attr">[5]</span><span class="selector-pseudo">:7</span></div><div class="line"><span class="selector-tag">t2</span> <span class="selector-attr">[5]</span><span class="selector-pseudo">:8</span></div><div class="line"><span class="selector-tag">t1</span> <span class="selector-attr">[5]</span><span class="selector-pseudo">:9</span></div><div class="line"><span class="selector-tag">t2</span> <span class="selector-attr">[5]</span><span class="selector-pseudo">:9</span></div></pre></td></tr></table></figure>
+<p>但是，yield()方法不会释放锁，上例中sync…关键字是对各自对象加锁，如果对同一个对象，那么t2会一直阻塞直到t1结束。这一点与wait不同。</p>
+<h2 id="7-线程休眠sleep"><a href="#7-线程休眠sleep" class="headerlink" title="7.线程休眠sleep()"></a>7.线程休眠sleep()</h2><p>sleep() 定义在Thread.java中。<br>sleep() 的作用是让当前线程休眠，即当前线程会从“运行状态”进入到“休眠(阻塞)状态”。sleep()会指定休眠时间，线程休眠的时间会大于/等于该休眠时间；在线程重新被唤醒时，它会由“阻塞状态”变成“就绪状态”，从而等待cpu的调度执行。</p>
+<p>使用方法：</p>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//让当前线程休眠（阻塞）100ms</span></div><div class="line">Thread.<span class="built-in">sleep</span>(<span class="number">100</span>);</div></pre></td></tr></table></figure>
+<p>同yield()一样，sleep不会释放对象锁。如果sleep期间还一直占用对象锁，其他线程会一直阻塞。</p>
+<h2 id="8-join-介绍"><a href="#8-join-介绍" class="headerlink" title="8. join()介绍"></a>8. join()介绍</h2><p>join() 定义在Thread.java中。join() 的作用：让“主线程”等待“子线程”结束之后才能继续运行。</p>
+<p>使用方法：</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//在Father线程中调用：</span></div><div class="line">sonThread.<span class="keyword">join</span>();</div></pre></td></tr></table></figure>
+<p>则father线程会阻塞到son线程完成。join的原理是用wait做的，因此其行为类似wait。</p>
+<h2 id="9-interrupt-和线程终止"><a href="#9-interrupt-和线程终止" class="headerlink" title="9.interrupt()和线程终止"></a>9.interrupt()和线程终止</h2><p>首先，Thread中的stop()和suspend()方法，由于固有的不安全性，已经建议不再使用！</p>
+<p>interrupt()的作用是中断本线程。具体原理原博客也没说清楚。下面结合实际说说终止线程的方式。</p>
+<h3 id="9-1-终止处于“阻塞状态”的线程"><a href="#9-1-终止处于“阻塞状态”的线程" class="headerlink" title="9.1.终止处于“阻塞状态”的线程"></a>9.1.终止处于“阻塞状态”的线程</h3><p>当线程由于被调用了sleep(), wait(), join()等方法而进入阻塞状态；若此时调用线程的interrupt()将线程的中断标记设为true。由于处于阻塞状态，中断标记会被清除，同时产生一个InterruptedException异常。将InterruptedException放在适当的位置就能终止线程，形式如下：</p>
+<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</div><div class="line">            <span class="comment">// 执行任务...</span></div><div class="line">        &#125;</div><div class="line">    &#125; <span class="keyword">catch</span> (InterruptedException ie) &#123;  </div><div class="line">        <span class="comment">// 由于产生InterruptedException异常，退出while(true)循环，线程终止！</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>说明：在while(true)中不断的执行任务，当线程处于阻塞状态时，调用线程的interrupt()产生InterruptedException中断。中断的捕获在while(true)之外，这样就退出了while(true)循环！</p>
+<h3 id="9-2-终止处于“运行状态”的线程"><a href="#9-2-终止处于“运行状态”的线程" class="headerlink" title="9.2.终止处于“运行状态”的线程"></a>9.2.终止处于“运行状态”的线程</h3><h4 id="9-2-1-通过“中断标记”终止运行中的线程"><a href="#9-2-1-通过“中断标记”终止运行中的线程" class="headerlink" title="9.2.1.通过“中断标记”终止运行中的线程"></a>9.2.1.通过“中断标记”终止运行中的线程</h4><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">while</span> (!isInterrupted()) &#123;</div><div class="line">        <span class="comment">// 执行任务...</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>说明：isInterrupted()是判断线程的中断标记是不是为true。当线程处于运行状态，并且我们需要终止它时；可以调用线程的interrupt()方法，使用线程的中断标记为true，即isInterrupted()会返回true。此时，就会退出while循环。</p>
+<p>注意：<em>interrupt()并不会终止处于“运行状态”的线程！它会将线程的中断标记设为true</em></p>
+<h4 id="9-2-2-通过“额外添加标记”终止运行中的线程"><a href="#9-2-2-通过“额外添加标记”终止运行中的线程" class="headerlink" title="9.2.2.通过“额外添加标记”终止运行中的线程"></a>9.2.2.通过“额外添加标记”终止运行中的线程</h4><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">boolean</span> flag= <span class="keyword">true</span>;</div><div class="line"><span class="keyword">protected</span> <span class="function"><span class="keyword">void</span> <span class="title">stopTask</span><span class="params">()</span> </span>&#123;</div><div class="line">    flag = <span class="keyword">false</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">while</span> (flag) &#123;</div><div class="line">        <span class="comment">// 执行任务...</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>说明：线程中有一个flag标记，它的默认值是true；并且我们提供stopTask()来设置flag标记。当我们需要终止该线程时，调用该线程的stopTask()方法就可以让线程退出while循环。</p>
+<p>注意：将flag定义为volatile类型，是为了保证flag的可见性。即其它线程通过stopTask()修改了flag之后，本线程能看到修改后的flag的值。</p>
+<h3 id="9-3-通用的终止线程的形式"><a href="#9-3-通用的终止线程的形式" class="headerlink" title="9.3.通用的终止线程的形式"></a>9.3.通用的终止线程的形式</h3><p>线程处于“阻塞状态”和“运行状态”的终止方式：</p>
+<figure class="highlight aspectj"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        <span class="comment">// 1. isInterrupted()保证，只要中断标记为true就终止线程。</span></div><div class="line">        <span class="keyword">while</span> (!isInterrupted()) &#123;</div><div class="line">            <span class="comment">// 执行任务...</span></div><div class="line">        &#125;</div><div class="line">    &#125; <span class="keyword">catch</span> (InterruptedException ie) &#123;  </div><div class="line">        <span class="comment">// 2. InterruptedException异常保证，当InterruptedException异常产生时，线程被终止。</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="10-线程优先级和守护线程"><a href="#10-线程优先级和守护线程" class="headerlink" title="10.线程优先级和守护线程"></a>10.线程优先级和守护线程</h2><p>java 中的线程优先级的范围是1～10，默认的优先级是5。“高优先级线程”会优先于“低优先级线程”执行。</p>
+<p>java 中有两种线程：用户线程和守护线程。可以通过isDaemon()方法来区别它们：如果返回false，则说明该线程是“用户线程”；否则就是“守护线程”。</p>
+<p>用户线程一般用户执行用户级任务，而守护线程也就是“后台线程”，一般用来执行后台任务。需要注意的是：Java虚拟机在“用户线程”都结束后会后退出。</p>
+<h2 id="11-综合应用：生产消费者问题"><a href="#11-综合应用：生产消费者问题" class="headerlink" title="11.综合应用：生产消费者问题"></a>11.综合应用：生产消费者问题</h2><p>生产/消费者问题是个非常典型的多线程问题，涉及到的对象包括“生产者”、“消费者”、“仓库”和“产品”。他们之间的关系如下：</p>
+<p>(01) 生产者仅仅在仓储未满时候生产，仓满则停止生产。</p>
+<p>(02) 消费者仅仅在仓储有产品时候才能消费，仓空则等待。</p>
+<p>(03) 当消费者发现仓储没产品可消费时候会通知生产者生产。</p>
+<p>(04) 生产者在生产出可消费产品时候，应该通知等待的消费者去消费。</p>
+<p>代码来自原博客，有改动，使过程更清晰：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 仓库</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Depot</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> capacity;    <span class="comment">// 仓库的容量</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> size;        <span class="comment">// 仓库的实际数量</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Depot</span><span class="params">(<span class="keyword">int</span> capacity)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.capacity = capacity;</div><div class="line">        <span class="keyword">this</span>.size = <span class="number">0</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">produce</span><span class="params">(<span class="keyword">int</span> val)</span> </span>&#123;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            <span class="comment">// left 表示“想要生产的数量”(有可能生产量太多，需多次生产)</span></div><div class="line">            <span class="keyword">int</span> left = val;</div><div class="line">            <span class="keyword">while</span> (left &gt; <span class="number">0</span>) &#123;</div><div class="line">                <span class="comment">// 库存已满时，等待“消费者”消费产品。</span></div><div class="line">                <span class="keyword">while</span> (size &gt;= capacity)</div><div class="line">                    wait();</div><div class="line">                <span class="comment">// 获取“实际生产的数量”(即库存中新增的数量)</span></div><div class="line">                <span class="comment">// 如果“库存”+“想要生产的数量”&gt;“总的容量”，则“实际增量”=“总的容量”-“当前容量”。(此时填满仓库)</span></div><div class="line">                <span class="comment">// 否则“实际增量”=“想要生产的数量”</span></div><div class="line">                <span class="keyword">int</span> inc = (size + left) &gt; capacity ? (capacity - size) : left;</div><div class="line">                size += inc;</div><div class="line">                left -= inc;</div><div class="line">                System.out.printf(<span class="string">"%s 生产:(%3d)个的过程 --&gt; 还需生产=%3d, 已生产=%3d, 仓库库存=%3d\n"</span>,</div><div class="line">                        Thread.currentThread().getName(), val, left, inc, size);</div><div class="line">                <span class="comment">// 通知“消费者”可以消费了。</span></div><div class="line">                notifyAll();</div><div class="line">            &#125;</div><div class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">consume</span><span class="params">(<span class="keyword">int</span> val)</span> </span>&#123;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            <span class="comment">// left 表示“客户要消费数量”(有可能消费量太大，库存不够，需多此消费)</span></div><div class="line">            <span class="keyword">int</span> left = val;</div><div class="line">            <span class="keyword">while</span> (left &gt; <span class="number">0</span>) &#123;</div><div class="line">                <span class="comment">// 库存为0时，等待“生产者”生产产品。</span></div><div class="line">                <span class="keyword">while</span> (size &lt;= <span class="number">0</span>)</div><div class="line">                    wait();</div><div class="line">                <span class="comment">// 获取“实际消费的数量”(即库存中实际减少的数量)</span></div><div class="line">                <span class="comment">// 如果“库存”&lt;“客户要消费的数量”，则“实际消费量”=“库存”；</span></div><div class="line">                <span class="comment">// 否则，“实际消费量”=“客户要消费的数量”。</span></div><div class="line">                <span class="keyword">int</span> dec = (size &lt; left) ? size : left;</div><div class="line">                size -= dec;</div><div class="line">                left -= dec;</div><div class="line">                System.out.printf(<span class="string">"%s 消费:(%3d)个的过程 &lt;-- 还需消费=%3d, 已消费=%3d, 仓库剩余=%3d\n"</span>,</div><div class="line">                        Thread.currentThread().getName(), val, left, dec, size);</div><div class="line">                notifyAll();</div><div class="line">            &#125;</div><div class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">"capacity:"</span> + capacity + <span class="string">", actual size:"</span> + size;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 生产者</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Producer</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> Depot depot;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Producer</span><span class="params">(Depot depot)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.depot = depot;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// 消费产品：新建一个线程向仓库中生产产品。</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">produce</span><span class="params">(<span class="keyword">final</span> <span class="keyword">int</span> val)</span> </span>&#123;</div><div class="line">        <span class="keyword">new</span> Thread() &#123;</div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">                depot.produce(val);</div><div class="line">            &#125;</div><div class="line">        &#125;.start();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 消费者</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Customer</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> Depot depot;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Customer</span><span class="params">(Depot depot)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.depot = depot;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// 消费产品：新建一个线程从仓库中消费产品。</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">consume</span><span class="params">(<span class="keyword">final</span> <span class="keyword">int</span> val)</span> </span>&#123;</div><div class="line">        <span class="keyword">new</span> Thread() &#123;</div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">                depot.consume(val);</div><div class="line">            &#125;</div><div class="line">        &#125;.start();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo1</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</div><div class="line">        Depot mDepot = <span class="keyword">new</span> Depot(<span class="number">100</span>);</div><div class="line">        Producer mPro = <span class="keyword">new</span> Producer(mDepot);</div><div class="line">        Customer mCus = <span class="keyword">new</span> Customer(mDepot);</div><div class="line"></div><div class="line">        mPro.produce(<span class="number">60</span>);</div><div class="line">        <span class="comment">//过了一会儿</span></div><div class="line">        Thread.sleep(<span class="number">1000</span>);</div><div class="line">        mPro.produce(<span class="number">120</span>);</div><div class="line">        <span class="comment">//过了一会儿</span></div><div class="line">        Thread.sleep(<span class="number">1000</span>);</div><div class="line">        mCus.consume(<span class="number">90</span>);</div><div class="line">        <span class="comment">//过了一会儿</span></div><div class="line">        Thread.sleep(<span class="number">1000</span>);</div><div class="line">        mCus.consume(<span class="number">150</span>);</div><div class="line">        <span class="comment">//过了一会儿</span></div><div class="line">        Thread.sleep(<span class="number">1000</span>);</div><div class="line">        mPro.produce(<span class="number">110</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>说明：</p>
+<p>(01) Producer是“生产者”类，它与“仓库(depot)”关联。当调用“生产者”的produce()方法时，它会新建一个线程并向“仓库”中生产产品。</p>
+<p>(02) Customer是“消费者”类，它与“仓库(depot)”关联。当调用“消费者”的consume()方法时，它会新建一个线程并消费“仓库”中的产品。</p>
+<p>(03) Depot是“仓库”类，仓库中记录“仓库的容量(capacity)”以及“仓库中当前产品数目(size)”。</p>
+<p>“仓库”类的生产方法produce()和消费方法consume()方法都是synchronized方法，进入synchronized方法体，意味着这个线程获取到了该“仓库”对象的同步锁。这也就是说，同一时间，生产者和消费者线程只能有一个能运行。通过同步锁，实现了对“残酷”的互斥访问。</p>
+<p>对于生产方法produce()而言：当仓库满时，生产者线程等待，需要等待消费者消费产品之后，生产线程才能生产；生产者线程生产完产品之后，会通过notifyAll()唤醒同步锁上的所有线程，包括“消费者线程”，即我们所说的“通知消费者进行消费”。</p>
+<p>对于消费方法consume()而言：当仓库为空时，消费者线程等待，需要等待生产者生产产品之后，消费者线程才能消费；消费者线程消费完产品之后，会通过notifyAll()唤醒同步锁上的所有线程，包括“生产者线程”，即我们所说的“通知生产者进行生产”。</p>
+<p>运行结果：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Thread-0 生产:( 60)个的过程 --&gt; 还需生产=  0, 已生产= 60, 仓库库存= 60</div><div class="line">Thread-1 生产:(120)个的过程 --&gt; 还需生产= 80, 已生产= 40, 仓库库存=100</div><div class="line">Thread-2 消费:( 90)个的过程 <span class="tag">&lt;<span class="name">--</span> 还需消费=  <span class="string">0,</span> 已消费= <span class="string">90,</span> 仓库剩余= <span class="string">10</span></span></div><div class="line"><span class="attr">Thread-1</span> 生产<span class="attr">:</span>(<span class="attr">120</span>)个的过程 <span class="attr">--</span>&gt; 还需生产=  0, 已生产= 80, 仓库库存= 90</div><div class="line">Thread-3 消费:(150)个的过程 <span class="tag">&lt;<span class="name">--</span> 还需消费= <span class="string">60,</span> 已消费= <span class="string">90,</span> 仓库剩余=  <span class="string">0</span></span></div><div class="line"><span class="attr">Thread-4</span> 生产<span class="attr">:</span>(<span class="attr">110</span>)个的过程 <span class="attr">--</span>&gt; 还需生产= 10, 已生产=100, 仓库库存=100</div><div class="line">Thread-3 消费:(150)个的过程 <span class="tag">&lt;<span class="name">--</span> 还需消费=  <span class="string">0,</span> 已消费= <span class="string">60,</span> 仓库剩余= <span class="string">40</span></span></div><div class="line"><span class="attr">Thread-4</span> 生产<span class="attr">:</span>(<span class="attr">110</span>)个的过程 <span class="attr">--</span>&gt; 还需生产=  0, 已生产= 10, 仓库库存= 50</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;阅读&lt;a href=&quot;http://www.cnblogs.com/skywang12345/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;skywang12345&lt;/a&gt;的&lt;a href=&quot;http://www.cnblogs.com/skywang1
+    
+    </summary>
+    
+      <category term="编程技术" scheme="http://channingsun.github.io/categories/%E7%BC%96%E7%A8%8B%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Java" scheme="http://channingsun.github.io/tags/Java/"/>
+    
+      <category term="多线程" scheme="http://channingsun.github.io/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>作为技术人员为什么要写博客（转）</title>
+    <link href="http://channingsun.github.io/2016/04/19/20160419_%E5%81%9A%E4%B8%BA%E6%8A%80%E6%9C%AF%E4%BA%BA%E5%91%98%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%86%99%E5%8D%9A%E5%AE%A2(%E8%BD%AC)/"/>
+    <id>http://channingsun.github.io/2016/04/19/20160419_做为技术人员为什么要写博客(转)/</id>
+    <published>2016-04-18T16:00:00.000Z</published>
+    <updated>2016-07-14T15:17:27.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>很久以前，在我还在上大学的时候，我的舍友<a href="https://blog.jamespan.me/" target="_blank" rel="external">@JamesPan</a>，便开始折腾起了博客，还给我推荐这一行为。我也跟风在博客园上写过，但一来水平和精力有限，而来心思不在上面，随便po了几个没营养的帖子就放弃了。</p>
+<p>沉沦与自我放弃多年之后，终于决定放下安逸而消沉的生活来到北京打拼。并折腾一个博客，用以学习、记录和分享，不管有没有人看。</p>
+<p>以下内容转自：<a href="http://www.cnblogs.com/zery/p/3343893.html" target="_blank" rel="external">Zery</a>，写的很不错。</p>
+<hr>
+<p>本文只代表个人见解，不代表任立场，如果您认为我的想法是错的那很正常，因为这是我的想法，如果您觉得您的想法和我一样，那我们就是传说中的”激友”(对生活冲满激情的朋友)。进入正题</p>
+<h2 id="一、我心中的博客"><a href="#一、我心中的博客" class="headerlink" title="一、我心中的博客"></a>一、我心中的博客</h2><p>我所以指的写博客，不单只是写一篇文章出来这一结果。而应该是写的这一过程，写过技术文章的朋友应该跟我一样有这么一个过程。</p>
+<ol>
+<li><p>自己了解学习，文章所涉及到的知识点，及知识点衍生出来的知识点。</p>
+</li>
+<li><p>对学习的知识点进行验证，以确保理论值与实践值保持一致。</p>
+</li>
+<li><p>构思文章的大纲，哪些部分需要重点写，需要配合实例代码，图片等信息。</p>
+</li>
+<li><p>动手写，写完后再次检查校正并排版，然后发表互联网的一些事。</p>
+</li>
+<li><p>针对网友的评论中提出的问题进行回复。</p>
+</li>
+</ol>
+<p>我写文章一般都会经历以上5上步，最终以上5步融合成一个结果那就是”一篇文章”这一过程也是我心中对的”写博客”一词的诠释。</p>
+<h2 id="二、为什么要写博客"><a href="#二、为什么要写博客" class="headerlink" title="二、为什么要写博客"></a>二、为什么要写博客</h2><h3 id="为自己"><a href="#为自己" class="headerlink" title="为自己"></a>为自己</h3><p>写博客对自己的提升是很大的，可能写一篇体现不出来，但是只要你坚持写效果就很明显，好处人个认为有以下几点：</p>
+<ol>
+<li><p>强化知识点：在写一篇文章前，你必定是要把以文章中心为主的知识点及衍生的知识点都详细了解一篇，在这一过程中必须会涉及到自己以前所了解过的知识，人的记忆是存在记忆曲线的需要不断的重复记忆才能长久的记住某一事物，而每写一篇文章时都会查阅资料，在这一过程中必然会遇到以前记住了而现在渐渐淡忘的知识点，当你再次看到时瞬间就会回想起，此时以前的知识点就得到了强化。</p>
+</li>
+<li><p>提升学习能力：同一样的人，了解同一知识点，用不同的方法，产生的结果必然会不一样，找到最佳的学习方法，这也是一种能力，这种能力是经过多次实践探索之后总结出来的，以前我每次需了解某一种技术时都会先百度看各种搜索结果，发现没有想要的之后，再Google。因为Google的结果与百度的会有所不同，Google结果中国外的文章相对会多一点，而偶然点了一个链接进入了博客园，发现就是自己想要的东西，而且把概念，代码，及经验都写上去了，看完之后对我帮助很大。</p>
+<p>渐渐的我便开始采这种方法，了解新知识概念性的直接看百度百科，实质性的直接上博客园的找找看。群里的朋友还推荐了一种方法，比如我要学MVC,园子里很多人都写了关于MVC的一系列文章，把那一系列的文章都看一遍，对于MVC就基本有了了解了，这便是学习能力的提升,对于某种技术用最短的时间做到了比较全面的了解。</p>
+</li>
+<li><p>提升文字组织能力：这个就不用说了，写博客，既然是写，就必然会有大量的文字，而如何组织文字表达出自己想表达的意思，是长期练习的，而写博客正好帮助你提高了你的文字组织能力。</p>
+</li>
+<li><p>提升逻辑思维能力：不用说，技术性的东西从来就没的单独存在的，都一层层技术相结合，那在了解某种技术时，自己的思维也是要顺着这种关系逐渐深入的，比如MVC，你不能只知道M是什么V是什么C是什么就行了吧，你得知道MVC这三者关系是怎样的，又是怎样交互，而你了解之后再把它写出来时，需要清晰逻辑。</p>
+</li>
+</ol>
+<h3 id="为他人"><a href="#为他人" class="headerlink" title="为他人"></a>为他人</h3><ol>
+<li><p>有意的：园子里有很多人都写过关于MVC框架WCF等等系列文章，目的就在于帮助新人快速上手，这个我深有体会，当初我开始学习MVC时就是看的T2噬菌体的MVC系列文章，整篇看完后再配合自己动手对于MVC就有了基本的了解了，在次感谢园子里无私献的大牛们。而以上行为就是有意的帮助。</p>
+</li>
+<li><p>无意的：很多时候在开发项目的过程中，遇到了技术问题，花了时间解决后，有人会写博客记录，并附上解决方法旨在当再次遇到问题时直接看下文章就知道如何处理了。而碰巧的是，这种问题不止他一个人遇到了。很多人在开发时也遇到了这个问题，在网上找答案时，就找到了这篇文章，并根据文章提供的解决方法，顺利的解决了问题，这种帮助就是无意的帮助</p>
+</li>
+</ol>
+<h2 id="三、一定要写博客吗"><a href="#三、一定要写博客吗" class="headerlink" title="三、一定要写博客吗"></a>三、一定要写博客吗</h2><p>答案肯定是否定的，中国几百万的程序员，如果都写博客，那程序员的春天就来了，但是事实并非如此。而我所讲的写博客的产物并不只是一篇文章，更多的是，对自己能力的提升，自己对知识点的总结，而发表在博客上只是为了公开，还有很多人喜欢记录在云笔记里面。还有工作很忙，没有空闲时间写出来，因为写技术性的文章，花的时间是很长的。写过的朋友都知道。</p>
+<h2 id="四、博客会给你带来哪些收获"><a href="#四、博客会给你带来哪些收获" class="headerlink" title="四、博客会给你带来哪些收获"></a>四、博客会给你带来哪些收获</h2><p>古人云:一份耕耘,一份收获。</p>
+<p>以下这些是帮助他人而得到的一些认可，并非主观上去追求的互联网的一些事</p>
+<p>MVP：微软每年都颁发MVP给那些经常与其他专业人士分享知识和专业技能，受人尊敬、信任，而且平易近人的专家。而这个称号则是对你写的博客质量的肯定</p>
+<p>知名度:文章写得好的人，技术水平肯定也很好，知道的人多了，知名度就有了，比如园子里排名前10的大家都知道，都看过他们的文章。互联网的一些事</p>
+<p>尊敬:对于技术界的大神，都是受人敬仰的，在园子里或者工作中也是一样的，在心里对大神们都是默默的佩服!至少我是这样啦，哈哈~也是我学习的榜样!</p>
+<h2 id="五、总结，互联网的一些事"><a href="#五、总结，互联网的一些事" class="headerlink" title="五、总结，互联网的一些事"></a>五、总结，互联网的一些事</h2><p>我所认的写博客是对自己所了解知识的强化，分享，自身能力的提升。当然写博客只是一种方法而以，只要能达到提升自我的效果什么方法都是可以的</p>
+<p>之前有看过一则新闻：即便没有读者，你也要写博客，文章也讲解了很多写博客的好处。</p>
+<p>而我写博客是希望，能提升自己的综合能力，并把自己的知识与经验分享给大家，如果有幸我的分享帮助了一些人，那将使我更加欣慰</p>
+<p>另外国庆节就要来了，祝奋斗在一线的程序员小伙伴们，放假快乐，放下工作好好出去玩几天吧!</p>
+<p>最后附上一句名言：<strong>有些事情你现在不去做，可能以后都不会有机会了！</strong></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;很久以前，在我还在上大学的时候，我的舍友&lt;a href=&quot;https://blog.jamespan.me/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;@JamesPan&lt;/a&gt;，便开始折腾起了博客，还给我推荐这一行为。我也跟风在博客园上写过，但一来水
+    
+    </summary>
+    
+      <category term="精品转载" scheme="http://channingsun.github.io/categories/%E7%B2%BE%E5%93%81%E8%BD%AC%E8%BD%BD/"/>
+    
+    
+      <category term="思考" scheme="http://channingsun.github.io/tags/%E6%80%9D%E8%80%83/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>在Mac上搭建本地SVN服务器</title>
+    <link href="http://channingsun.github.io/2016/04/18/20160418_%E5%9C%A8Mac%E4%B8%8A%E6%90%AD%E5%BB%BA%E6%9C%AC%E5%9C%B0SVN%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    <id>http://channingsun.github.io/2016/04/18/20160418_在Mac上搭建本地SVN服务器/</id>
+    <published>2016-04-17T16:00:00.000Z</published>
+    <updated>2016-07-14T15:17:22.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>平时开发总是免不了写一些demo，或者自己折腾一些小东西啊，无论是用公司的svn还是github总是感觉没有那么方便，于是就想自己弄一个svn的本地服务器，方便做版本控制。在网上大致搜了一下，mac下也很简单，几条命令搞定。</p>
+<p>1.创建文件夹：</p>
+<p>在用户目录下执行：</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mkdir -p Coding<span class="regexp">/svn/</span><span class="keyword">repositories</span><span class="regexp">/local</span></div></pre></td></tr></table></figure>
+<p>2.创建版本库：</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo svnadmin create Coding<span class="regexp">/svn/</span><span class="keyword">repositories</span><span class="regexp">/local/</span></div></pre></td></tr></table></figure>
+<p>会发现local文件夹下生成了一堆文件。</p>
+<p>3.修改conf文件夹下的svnserve.conf文件，内容如下</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="section">[general]</span></div><div class="line"><span class="attr">anon-access</span> = none</div><div class="line"><span class="attr">auth-access</span> = write</div><div class="line"><span class="attr">password-db</span> = passwd</div><div class="line"><span class="attr">authz-db</span> = authz</div></pre></td></tr></table></figure>
+<p>4.修改conf下的passwd文件，在[users]后面加入以下内容</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="section">[users]</span></div><div class="line"><span class="attr">Administrator</span> = <span class="number">123456</span></div><div class="line"><span class="attr">SunQiang</span> = <span class="number">123456</span></div></pre></td></tr></table></figure>
+<p>5.修改conf下的authz文件，设置权限</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">[groups]</div><div class="line">admin = Administrator</div><div class="line"><span class="keyword">user</span> <span class="title">= SunQiang</span></div><div class="line"></div><div class="line">[/]</div><div class="line">@admin = rw</div><div class="line">@<span class="keyword">user</span> <span class="title">= rw</span></div><div class="line"></div><div class="line">[local:/]</div><div class="line">@admin = rw</div><div class="line">@<span class="keyword">user</span> <span class="title">= rw</span></div></pre></td></tr></table></figure>
+<p>这里定义了两个组，admin 和 user ，admin这个组里面有Administrator这个用户（一个组里面可以有多个用户，多个用户用逗号隔开），user这个组里面有SunQiang这个用户。</p>
+<p>注意！这个 / 目录是指我的repositories目录，而不是local目录。</p>
+<p>6.启动svn服务器</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo svnserve -<span class="keyword">d</span> -r /Users/SunQiang/Coding/svn/repositories --<span class="keyword">log</span>-<span class="keyword">file</span>=/<span class="keyword">var</span>/<span class="keyword">log</span>/svn.<span class="built_in">log</span></div></pre></td></tr></table></figure>
+<p>7.svn默认使用3690端口，如果端口不冲突，svn服务应该就正常起来了，简单的测试一下</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">telnet localhost <span class="number">3690</span></div></pre></td></tr></table></figure>
+<p>结果如下为正常：</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Trying ::<span class="number">1</span>...</div><div class="line">telne<span class="variable">t:</span> connect <span class="keyword">to</span> address ::<span class="number">1</span>: Connection refused</div><div class="line">Trying <span class="number">127.0</span>.<span class="number">0.1</span>...</div><div class="line">Connected <span class="keyword">to</span> localhost.</div><div class="line">Escape character <span class="keyword">is</span> <span class="string">'^]'</span>.</div><div class="line">( success ( <span class="number">2</span> <span class="number">2</span> ( ) ( <span class="keyword">edit</span>-pipeline svndiff1 absent-entries commit-revprops depth <span class="built_in">log</span>-revprops atomic-revprops partial-replay ) ) )</div></pre></td></tr></table></figure>
+<p>7.然后即可在eclipse中使用路径</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">svn:</span><span class="comment">//localhost/local</span></div></pre></td></tr></table></figure>
+<p>8.删除此svn服务</p>
+<p>先在activity manager中停止svnserve进程，然后删除整个svn文件夹即可</p>
+<p>9.开机启动</p>
+<p>网上有博文说将6里面的命令写到/etc/rc.local中，不过我试了没成功。于是将6中的命令保存到.sh文件，放入我自己写的一堆shell脚本的目录下（此目录已添加到path），用的时候直接start_svn.sh即可。</p>
+<p>EOF</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;平时开发总是免不了写一些demo，或者自己折腾一些小东西啊，无论是用公司的svn还是github总是感觉没有那么方便，于是就想自己弄一个svn的本地服务器，方便做版本控制。在网上大致搜了一下，mac下也很简单，几条命令搞定。&lt;/p&gt;
+&lt;p&gt;1.创建文件夹：&lt;/p&gt;
+&lt;p&gt;在
+    
+    </summary>
+    
+      <category term="编程技术" scheme="http://channingsun.github.io/categories/%E7%BC%96%E7%A8%8B%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="SVN" scheme="http://channingsun.github.io/tags/SVN/"/>
+    
+      <category term="Mac" scheme="http://channingsun.github.io/tags/Mac/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>开始Hexo博客之旅</title>
+    <link href="http://channingsun.github.io/2016/04/17/20160417_%E5%BC%80%E5%A7%8BHexo%E5%8D%9A%E5%AE%A2%E4%B9%8B%E6%97%85/"/>
+    <id>http://channingsun.github.io/2016/04/17/20160417_开始Hexo博客之旅/</id>
+    <published>2016-04-16T16:00:00.000Z</published>
+    <updated>2016-07-14T15:17:17.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>想建一个自己的博客很久了，然而拖延症晚期。。。你懂的。经历了浑浑噩噩的大学四年，浑浑噩噩的一年多工作之后，终于决定改变些什么。于是辞去了天津的那份没有前途的工作，来到北京，加入北漂一族。也想如此给自己一些压力，一些动力。就用这个博客，记录我的一些足迹吧，希望自己日后不再是低级一个码农。</p>
+<p>搭建的过程中在网上看了很多很多博客，在这里就不一一列举了。然后自己汇总了一下，就贴在这里，作为第一篇博文吧。</p>
+<h2 id="安装Hexo与配置"><a href="#安装Hexo与配置" class="headerlink" title="安装Hexo与配置"></a>安装Hexo与配置</h2><p>1.前期准备工作</p>
+<p>安装node.js的环境，包括nvm的安装、node.js具体版本的安装<br>PS:Mac下通过homebrew神器安装nvm，再nvm install node.js的某版本即可</p>
+<p>2.安装hexo</p>
+<p>使用淘宝镜像，编辑 ~/.npmrc 加入下面内容（没有则新建）<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">registry = <span class="string">https:</span><span class="comment">//registry.npm.taobao.org</span></div></pre></td></tr></table></figure></p>
+<p>然后安装：<br><figure class="highlight avrasm"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install -g hexo-<span class="keyword">cli</span></div></pre></td></tr></table></figure></p>
+<p>3.创建hexo文件夹</p>
+<p>先cd到为hexo准备的文件夹，然后执行：<br><figure class="highlight cmake"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">hexo init</div><div class="line">npm <span class="keyword">install</span></div></pre></td></tr></table></figure></p>
+<p>4.准备github</p>
+<p>在github上创建名为yourname.github.io的repository，这里yourname一定要换成你自己的github的username</p>
+<p>5.配置hexo</p>
+<p>修改hexo目录下的_config.yml文件的末尾：<br><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">deploy</span>:</div><div class="line">  <span class="attribute">type</span>: git</div><div class="line">  <span class="attribute">repository</span>: git<span class="variable">@github</span>.<span class="attribute">com</span>:yourname/yourname.github.io.git</div><div class="line">  <span class="attribute">branch</span>: master</div></pre></td></tr></table></figure></p>
+<p>同理，yourname换成你的github的username</p>
+<p>6.安装git部署工具</p>
+<p>在hexo的目录下执行命令：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm <span class="keyword">install</span> hexo-deployer-git <span class="comment">--save</span></div></pre></td></tr></table></figure></p>
+<p>7.执行部署</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">hexo g</span></div><div class="line">hexo d</div></pre></td></tr></table></figure>
+<p>至此博客搭建完成，浏览器输入yourname.github.io即可看到个人博客的内容</p>
+<h2 id="为博客更换主题"><a href="#为博客更换主题" class="headerlink" title="为博客更换主题"></a>为博客更换主题</h2><p>如果觉得默认主题不太符合个人审美，可以选择自己喜欢的主题更换。主题的选择可以参考知乎：<a href="https://www.zhihu.com/question/24422335" target="_blank" rel="external">有哪些好看的 Hexo 主题？</a>这里以主题<a href="https://github.com/tufu9441/maupassant-hexo" target="_blank" rel="external">maupassant</a>为例。</p>
+<p>1.fork主题，便于日后修改与保存</p>
+<p>2.git clone此主题到hexo目录下的themes目录（通过github desktop客户端，方便一些）</p>
+<p><strong>注意！clone下的主题名字是maupassant-hexo，需要去掉尾部的-hexo</strong></p>
+<p>3.安装此主题需要的插件包</p>
+<p>在hexo目录下执行：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">npm <span class="keyword">install</span> hexo-renderer-jade <span class="comment">--save</span></div><div class="line">npm <span class="keyword">install</span> hexo-renderer-sass <span class="comment">--save</span></div></pre></td></tr></table></figure></p>
+<p>2016.05.18 update pinyin:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm <span class="keyword">install</span> pinyin <span class="comment">--save</span></div></pre></td></tr></table></figure>
+<p>4.编辑Hexo目录下的 _config.yml，将theme的值改为maupassant</p>
+<p>5.设置网站的Favicon：</p>
+<p>将自己喜欢的图片重命名为favicon.ico放在Hexo根目录的source文件夹下，建议的大小：32px*32px</p>
+<p>6.添加[关于]界面：</p>
+<p>在博客source目录下建立一个包含index.md的about文件夹，编辑该md文件内容</p>
+<p>7.添加rss订阅功能</p>
+<p>在hexo根目录下安装feed生成插件：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm <span class="keyword">install</span> hexo-generator-feed <span class="comment">--save</span></div></pre></td></tr></table></figure></p>
+<p>而后将此插件配置到hexo的_config.yml<br><figure class="highlight dts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># Extensions</span></div><div class="line"><span class="symbol">plugin:</span></div><div class="line">- hexo-generator-feed</div><div class="line"><span class="meta">#Feed Atom</span></div><div class="line"><span class="symbol">feed:</span></div><div class="line"><span class="symbol">  type:</span> atom</div><div class="line"><span class="symbol">  path:</span> atom.xml</div><div class="line"><span class="symbol">  limit:</span> <span class="number">20</span></div></pre></td></tr></table></figure></p>
+<p>8.添加评论功能</p>
+<p>先去<a href="https://disqus.com/" target="_blank" rel="external">disqus</a>注册，然后在主题的_config.yml中disqus项填写你的shortname即可</p>
+<p>8.使文章具有目录：</p>
+<p>在front-matter里添加<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">toc:</span> <span class="literal">true</span></div></pre></td></tr></table></figure></p>
+<h2 id="关于front-matter"><a href="#关于front-matter" class="headerlink" title="关于front-matter"></a>关于front-matter</h2><p>在搭建博客的过程中发现很多博主提到front-matter这个东西，遂查了一下hexo文档，将结果简要贴在下面：</p>
+<p><strong>front-matter是文件最上方以 --- 分隔的区域，用于指定个别文件的变量。</strong></p>
+<p>以下是预先定义的参数，您可在模板中使用这些参数值并加以利用。</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>layout</td>
+<td>布局</td>
+<td></td>
+</tr>
+<tr>
+<td>title</td>
+<td>标题</td>
+<td></td>
+</tr>
+<tr>
+<td>date</td>
+<td>建立日期</td>
+<td>文件建立日期</td>
+</tr>
+<tr>
+<td>updated</td>
+<td>更新日期</td>
+<td>文件更新日期</td>
+</tr>
+<tr>
+<td>comments</td>
+<td>开启文章的评论功能</td>
+<td>true</td>
+</tr>
+<tr>
+<td>tags</td>
+<td>标签（不适用于分页）</td>
+<td></td>
+</tr>
+<tr>
+<td>categories</td>
+<td>分类（不适用于分页）</td>
+<td></td>
+</tr>
+<tr>
+<td>permalink</td>
+<td>覆盖文章网址</td>
+</tr>
+</tbody>
+</table>
+<p>结束，不早了，睡觉，明天上班。</p>
+<p>2016.05.19 update domain:</p>
+<h2 id="给博客添加域名"><a href="#给博客添加域名" class="headerlink" title="给博客添加域名"></a>给博客添加域名</h2><p>首先，你需要拥有一个域名，国内的话，从万网买一个挺方便的。以我的域名<strong>channingsun.bid</strong>为例。</p>
+<p>然后，去万网的控制台添加域名解析的CNAME，如下图：</p>
+<p><img src="/img/开始Hexo博客之旅1.png" alt="附件1"></p>
+<p>第三步，去hexo的source文件夹下新建一个CNAME文件，内容为域名：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">channingsun</span><span class="selector-class">.bid</span></div></pre></td></tr></table></figure>
+<p>然后hexo g再hexo d即可。</p>
+<p>EOF</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;想建一个自己的博客很久了，然而拖延症晚期。。。你懂的。经历了浑浑噩噩的大学四年，浑浑噩噩的一年多工作之后，终于决定改变些什么。于是辞去了天津的那份没有前途的工作，来到北京，加入北漂一族。也想如此给自己一些压力，一些动力。就用这个博客，记录我的一些足迹吧，希望自己日后不再是低
+    
+    </summary>
+    
+      <category term="编程技术" scheme="http://channingsun.github.io/categories/%E7%BC%96%E7%A8%8B%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Hexo" scheme="http://channingsun.github.io/tags/Hexo/"/>
+    
+  </entry>
+  
+</feed>
