@@ -641,7 +641,7 @@ pre {
   display: block;
   width: 4px;
   background: #eee;
-  top: -3%;
+  top: -5%;
   right: -30px;
   bottom: -3%; }
 
@@ -673,7 +673,7 @@ pre {
 
 #process .present {
   position: absolute;
-  top: -3%;
+  top: -5%;
   right: 0;
   margin-top: -20px;
   line-height: 100%; }
@@ -687,7 +687,7 @@ pre {
 
 #process .dot_tp {
   position: absolute;
-  top: -3%;
+  top: -5%;
   right: -35px;
   background-color: transparent;
   height: 15px;
