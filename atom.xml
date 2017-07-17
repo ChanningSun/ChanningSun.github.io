@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://channingsun.github.io/"/>
-  <updated>2017-06-25T09:03:05.000Z</updated>
+  <updated>2017-07-17T13:45:14.000Z</updated>
   <id>http://channingsun.github.io/</id>
   
   <author>
@@ -16,11 +16,61 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Unity与Android交互小结</title>
+    <link href="http://channingsun.github.io/2017/07/11/20170611_Unity%E4%B8%8EAndroid%E4%BA%A4%E4%BA%92%E5%B0%8F%E7%BB%93/"/>
+    <id>http://channingsun.github.io/2017/07/11/20170611_Unity与Android交互小结/</id>
+    <published>2017-07-10T16:00:00.000Z</published>
+    <updated>2017-07-17T13:45:14.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="使用形式"><a href="#使用形式" class="headerlink" title="使用形式"></a>使用形式</h2><h3 id="Unity导出到Android"><a href="#Unity导出到Android" class="headerlink" title="Unity导出到Android"></a>Unity导出到Android</h3><p>Unity默认导出的apk是全屏的游戏，如果对其展示形式、生命周期、衍生功能等有定制需求时使用此方法。</p>
+<p>Unity构建的时侯不直接导出apk，而是导出Android工程，然后将assets文件夹、so文件、unity-classes.jar复制到安卓工程下，再进行开发。</p>
+<p>一般在Android代码中addview添加unityplayer实例，并注册resume、pause、injectEvent、onWindowFocusChanged等几个关键的事件。可参见unity-classes.jar中的UnityPlayerActivity.java的实现。</p>
+<h3 id="android导出到unity"><a href="#android导出到unity" class="headerlink" title="android导出到unity"></a>android导出到unity</h3><p>将android的代码编译成jar包，放入unity中供调用。一般用于友盟统计等需求。</p>
+<p>方法是，在unity工程的Assets目录下新建Plugins\Android文件夹，将编译后的jar包放进去。</p>
+<h2 id="通讯方式"><a href="#通讯方式" class="headerlink" title="通讯方式"></a>通讯方式</h2><h3 id="Android调用Unity"><a href="#Android调用Unity" class="headerlink" title="Android调用Unity"></a>Android调用Unity</h3><p>只有一种方法：</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">UnityPlayer.UnitySendMessage(UNITY_OBJECT_NAME, UNITY_METHOD_NAME, <span class="keyword">params</span>);</div></pre></td></tr></table></figure>
+<h3 id="Unity调用Android"><a href="#Unity调用Android" class="headerlink" title="Unity调用Android"></a>Unity调用Android</h3><p>方法较多，但大都围绕两个类<a href="https://docs.unity3d.com/ScriptReference/AndroidJavaClass.html" target="_blank" rel="external">AndroidJavaClass</a>和<a href="https://docs.unity3d.com/ScriptReference/AndroidJavaObject.html" target="_blank" rel="external">AndroidJavaObject</a>：</p>
+<p>网上教程大都是这种，获取某个实例的某个对象然后进行操作：</p>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">AndroidJavaClass <span class="keyword">jc</span> = new AndroidJavaClass(<span class="string">"com.unity3d.player.UnityPlayer"</span>)<span class="comment">;</span></div><div class="line">AndroidJavaObject <span class="keyword">jo</span> = <span class="keyword">jc</span>.GetStatic&lt;AndroidJavaObject&gt;(<span class="string">"currentActivity"</span>)<span class="comment">;</span></div><div class="line"><span class="keyword">jo</span>.Call(<span class="string">"AndroidFunction"</span>,<span class="string">"teststring"</span>)<span class="comment">;</span></div></pre></td></tr></table></figure>
+<p>然而实际中还是下面这种实用，单独开一个类，直接调用其静态方法：</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">AndroidJavaClass </span><span class="keyword">jo </span>= new <span class="keyword">AndroidJavaClass("com.test.unity.UnityManager");</span></div><div class="line"><span class="keyword">jo.CallStatic("receiveMessage", </span>msg)<span class="comment">;</span></div></pre></td></tr></table></figure>
+<p>对应Android端的代码为：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//com.test.unity.UnityManager类中：</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">receiveMessage</span><span class="params">(String msg)</span> </span>&#123;</div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Android调用Unity时没有返回值，而Unity调用Android则是可以添加返回值的，所以上面的代码可以改成这样：</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="type">string</span> valueString = jo.CallStatic&lt;<span class="type">string</span>&gt;(<span class="string">"valueOf"</span>, <span class="number">42.0</span>);</div></pre></td></tr></table></figure>
+<p>对应Android端的代码也需要将返回值改为String即可。</p>
+<h2 id="通讯方式实践"><a href="#通讯方式实践" class="headerlink" title="通讯方式实践"></a>通讯方式实践</h2><p>首先定义两遍通讯通用的消息结构：</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> MessagePOJO &#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">int</span> MsgId;<span class="comment">//消息id</span></div><div class="line">    <span class="keyword">public</span> <span class="keyword">String</span> MsgBody;<span class="comment">//消息体，本身也是又其他消息对象序列化而成</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>1.两边定好消息id（MsgID）和对应消息的结构体（java类）。</p>
+<p>2.在Android调用Unity时，将MessagePOJO对象用Gson序列化成字符串，通过UnityPlayer.UnitySendMessage传给Unity。</p>
+<p>3.Unity接到消息后，用MessagePOJO结构体反序列化json，先得到MsgID，然后用对应的其他结构体反序列化MsgBody。</p>
+<p>4.Unity将MessagePOJO序列化成String，然后调用AndroidJavaClass.CallStatic传递给Unity。</p>
+<p>5.Android接到消息后，用MessagePOJO结构体反序列化json，先得到MsgID，然后用对应的其他结构体反序列化MsgBody。</p>
+<p>Unity和Android对应的消息分发/处理逻辑看业务需求和个人便好，不再赘述。</p>
+<p>EOF</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;使用形式&quot;&gt;&lt;a href=&quot;#使用形式&quot; class=&quot;headerlink&quot; title=&quot;使用形式&quot;&gt;&lt;/a&gt;使用形式&lt;/h2&gt;&lt;h3 id=&quot;Unity导出到Android&quot;&gt;&lt;a href=&quot;#Unity导出到Android&quot; class=&quot;header
+    
+    </summary>
+    
+      <category term="编程技术" scheme="http://channingsun.github.io/categories/%E7%BC%96%E7%A8%8B%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Android" scheme="http://channingsun.github.io/tags/Android/"/>
+    
+      <category term="Unity" scheme="http://channingsun.github.io/tags/Unity/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Unity AssetBundle使用小结</title>
     <link href="http://channingsun.github.io/2017/06/06/20170606_Unity%20AssetBundle%E4%BD%BF%E7%94%A8%E5%B0%8F%E7%BB%93/"/>
     <id>http://channingsun.github.io/2017/06/06/20170606_Unity AssetBundle使用小结/</id>
     <published>2017-06-05T16:00:00.000Z</published>
-    <updated>2017-06-25T09:03:05.000Z</updated>
+    <updated>2017-07-17T13:45:11.000Z</updated>
     
     <content type="html"><![CDATA[<p>1.设置bundle name</p>
 <p>选中assets文件，在右下角面板中为其设置assets bundle的名字</p>
@@ -34,6 +84,7 @@
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Application<span class="selector-class">.persistentDataPath</span> = /storage/emulated/<span class="number">0</span>/Android/data/com<span class="selector-class">.moxiu</span><span class="selector-class">.demo</span>/files</div><div class="line">Application<span class="selector-class">.dataPath</span> = /data/app/com<span class="selector-class">.moxiu</span><span class="selector-class">.demo-2</span><span class="selector-class">.apk</span></div><div class="line">Application<span class="selector-class">.streamingAssetsPath</span> = jar:file:<span class="comment">///data/app/com.moxiu.demo-2.apk!/assets</span></div><div class="line">Application<span class="selector-class">.temporaryCachePath</span> = /storage/emulated/<span class="number">0</span>/Android/data/com<span class="selector-class">.moxiu</span><span class="selector-class">.demo</span>/cache</div></pre></td></tr></table></figure>
 <p>4.加载assets bundle示例代码：</p>
 <figure class="highlight cs"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">string</span> baseUrl = <span class="string">"http://10.0.102.45:8080/Assetbundle/"</span>;</div><div class="line"><span class="keyword">private</span> <span class="keyword">string</span> basePath = <span class="string">"/sdcard/Assetbundle/"</span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> GameObject <span class="title">LoadFromLoacl</span> (<span class="params"><span class="keyword">string</span> bundleName, <span class="keyword">string</span> objectName</span>)</span></div><div class="line">&#123;</div><div class="line">	AssetBundle targetBundle = AssetBundle.LoadFromFile (basePath + bundleName);</div><div class="line">	<span class="keyword">if</span> (targetBundle != <span class="literal">null</span>) &#123;</div><div class="line">		GameObject asset = targetBundle.LoadAsset (objectName) <span class="keyword">as</span> GameObject;</div><div class="line">		targetBundle.Unload (<span class="literal">false</span>);</div><div class="line">		<span class="keyword">return</span> asset;</div><div class="line">	&#125; <span class="keyword">else</span> &#123;</div><div class="line">		<span class="keyword">return</span> <span class="literal">null</span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> GameObject <span class="title">LoadFromNet</span> (<span class="params"><span class="keyword">string</span> bundleName, <span class="keyword">string</span> objectName</span>)</span></div><div class="line">&#123;</div><div class="line">	WWW www = WWW.LoadFromCacheOrDownload (baseUrl + bundleName, <span class="number">1</span>);</div><div class="line">	AssetBundle targetBundle = www.assetBundle;</div><div class="line"></div><div class="line">	<span class="keyword">if</span> (targetBundle != <span class="literal">null</span>) &#123;</div><div class="line">		GameObject asset = targetBundle.LoadAsset (objectName) <span class="keyword">as</span> GameObject;</div><div class="line">		targetBundle.Unload (<span class="literal">false</span>);</div><div class="line">		<span class="keyword">return</span> asset;</div><div class="line">	&#125; <span class="keyword">else</span> &#123;</div><div class="line">		<span class="keyword">return</span> <span class="literal">null</span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>EOF</p>
 ]]></content>
     
     <summary type="html">
@@ -60,7 +111,7 @@
     <link href="http://channingsun.github.io/2016/12/31/20161231_2016%E7%A2%8E%E7%A2%8E%E5%BF%B5%E6%B1%87%E6%80%BB/"/>
     <id>http://channingsun.github.io/2016/12/31/20161231_2016碎碎念汇总/</id>
     <published>2016-12-30T16:00:00.000Z</published>
-    <updated>2017-02-19T11:14:42.000Z</updated>
+    <updated>2017-07-17T13:46:06.000Z</updated>
     
     <content type="html"><![CDATA[<blockquote><p><span class="fa-stack fa-lg"><i class="fa fa-home fa-stack-1x"></i></span>2016的碎碎念的结束</p>
 <footer><span>2017-12-31 23:59:59</span></footer></blockquote>
@@ -116,7 +167,9 @@
 <blockquote><p><span class="fa-stack fa-lg"><i class="fa fa-rmb fa-stack-1x"></i></span>以后绝对不能再大手大脚的在手游上花钱，剁手啊😭</p>
 <footer><span>2016-05-10 23:45:00</span></footer></blockquote>
 <blockquote><p><span class="fa-stack fa-lg"><i class="fa fa-futbol-o fa-stack-1x"></i></span>终于把这个timeline搞好了，上班期间偷偷搞这个也是胆儿肥😂</p>
-<footer><span>2016-05-10 14:15:00</span></footer></blockquote>]]></content>
+<footer><span>2016-05-10 14:15:00</span></footer></blockquote>
+<p>EOF</p>
+]]></content>
     
     <summary type="html">
     
