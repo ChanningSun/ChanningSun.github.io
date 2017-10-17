@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://channingsun.github.io/"/>
-  <updated>2017-10-17T09:05:25.158Z</updated>
+  <updated>2017-10-17T10:13:19.811Z</updated>
   <id>http://channingsun.github.io/</id>
   
   <author>
@@ -14,46 +14,6 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>Windows配置Jenkins的坑</title>
-    <link href="http://channingsun.github.io/2017/10/17/20171017_windows%E9%85%8D%E7%BD%AEjenkins/"/>
-    <id>http://channingsun.github.io/2017/10/17/20171017_windows配置jenkins/</id>
-    <published>2017-10-16T16:00:00.000Z</published>
-    <updated>2017-10-17T09:05:25.158Z</updated>
-    
-    <content type="html"><![CDATA[<p>记录一些在Windows上搭建Jenkins服务的坑。</p>
-<p>首先，选择的是Jenkins的windows安装包版本，这个版本无需自己再搭建tomcat服务器。</p>
-<h3 id="坑1：不要安装在默认路径"><a href="#坑1：不要安装在默认路径" class="headerlink" title="坑1：不要安装在默认路径"></a>坑1：不要安装在默认路径</h3><p>系统默认路径是C:\Program Files\Jenkins。这个路径的“Program Files”空格会在后面编写脚本的时候带来诸多问题。</p>
-<p>因此建议安装路径不要包含空格、中文字符等。</p>
-<h3 id="坑2-登录账户修改"><a href="#坑2-登录账户修改" class="headerlink" title="坑2:登录账户修改"></a>坑2:登录账户修改</h3><p>在后面配置git账户的时候发现，无论如何都连不上git服务器。原来需要配置Jenkins的登录账户，不然找不到当前用户目录下的“.ssh”和“.gitconfig”文件，自然会出错。</p>
-<p>配置方法：打开：我的电脑/管理/服务和应用程序/服务。找到Jenkins服务，右键菜单点[属性(R)]，填上自己的账户密码即可：</p>
-<p><img src="/media/Windows%E9%85%8D%E7%BD%AEJenkins%E7%9A%84%E5%9D%911-1.png" alt="Windows配置Jenkins的坑1"></p>
-<h3 id="坑3：shell程序"><a href="#坑3：shell程序" class="headerlink" title="坑3：shell程序"></a>坑3：shell程序</h3><p>Windows的cmd脚本实在难以下咽，所以还是选择用Linux的脚本执行爽一些。Windows环境下，只要安装了git，就会有一个简单的shell环境可供使用。</p>
-<p>在Jenkins的系统设置中，将shell程序设定为git提供的shell终端：</p>
-<p><img src="/media/Windows%E9%85%8D%E7%BD%AEJenkins%E7%9A%84%E5%9D%912-1.png" alt="Windows配置Jenkins的坑2"></p>
-<h3 id="坑4-环境变量"><a href="#坑4-环境变量" class="headerlink" title="坑4:环境变量"></a>坑4:环境变量</h3><p>设定完了shell executable还不行，还需要将git的shell相关环境变量再设置一遍（即使在Windows中已经设定好）：</p>
-<p><img src="/media/Windows%E9%85%8D%E7%BD%AEJenkins%E7%9A%84%E5%9D%913-1.png" alt="Windows配置Jenkins的坑3"></p>
-<p>顺便还有Android Home环境变量，不然后面打包apk会有问题。</p>
-<p>EOF</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;记录一些在Windows上搭建Jenkins服务的坑。&lt;/p&gt;
-&lt;p&gt;首先，选择的是Jenkins的windows安装包版本，这个版本无需自己再搭建tomcat服务器。&lt;/p&gt;
-&lt;h3 id=&quot;坑1：不要安装在默认路径&quot;&gt;&lt;a href=&quot;#坑1：不要安装在默认路径&quot; cl
-    
-    </summary>
-    
-      <category term="编程技术" scheme="http://channingsun.github.io/categories/%E7%BC%96%E7%A8%8B%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="Jenkins" scheme="http://channingsun.github.io/tags/Jenkins/"/>
-    
-      <category term="Windows" scheme="http://channingsun.github.io/tags/Windows/"/>
-    
-  </entry>
   
   <entry>
     <title>Docker读书笔记1</title>
@@ -90,6 +50,46 @@
     
     
       <category term="Docker" scheme="http://channingsun.github.io/tags/Docker/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Windows配置Jenkins的坑</title>
+    <link href="http://channingsun.github.io/2017/10/16/20171016_windows%E9%85%8D%E7%BD%AEjenkins/"/>
+    <id>http://channingsun.github.io/2017/10/16/20171016_windows配置jenkins/</id>
+    <published>2017-10-15T16:00:00.000Z</published>
+    <updated>2017-10-17T10:34:50.288Z</updated>
+    
+    <content type="html"><![CDATA[<p>记录一些在Windows上搭建Jenkins服务的坑。</p>
+<p>首先，选择的是Jenkins的windows安装包版本，这个版本无需自己再搭建tomcat服务器。</p>
+<h3 id="坑1：不要安装在默认路径"><a href="#坑1：不要安装在默认路径" class="headerlink" title="坑1：不要安装在默认路径"></a>坑1：不要安装在默认路径</h3><p>系统默认路径是C:\Program Files\Jenkins。这个路径的“Program Files”空格会在后面编写脚本的时候带来诸多问题。</p>
+<p>因此建议安装路径不要包含空格、中文字符等。</p>
+<h3 id="坑2-登录账户修改"><a href="#坑2-登录账户修改" class="headerlink" title="坑2:登录账户修改"></a>坑2:登录账户修改</h3><p>在后面配置git账户的时候发现，无论如何都连不上git服务器。原来需要配置Jenkins的登录账户，不然找不到当前用户目录下的“.ssh”和“.gitconfig”文件，自然会出错。</p>
+<p>配置方法：打开：我的电脑/管理/服务和应用程序/服务。找到Jenkins服务，右键菜单点[属性(R)]，填上自己的账户密码即可：</p>
+<p><img src="/media/Windows%E9%85%8D%E7%BD%AEJenkins%E7%9A%84%E5%9D%911-1.png" alt="Windows配置Jenkins的坑1"></p>
+<h3 id="坑3：shell程序"><a href="#坑3：shell程序" class="headerlink" title="坑3：shell程序"></a>坑3：shell程序</h3><p>Windows的cmd脚本实在难以下咽，所以还是选择用Linux的脚本执行爽一些。Windows环境下，只要安装了git，就会有一个简单的shell环境可供使用。</p>
+<p>在Jenkins的系统设置中，将shell程序设定为git提供的shell终端：</p>
+<p><img src="/media/Windows%E9%85%8D%E7%BD%AEJenkins%E7%9A%84%E5%9D%912-1.png" alt="Windows配置Jenkins的坑2"></p>
+<h3 id="坑4-环境变量"><a href="#坑4-环境变量" class="headerlink" title="坑4:环境变量"></a>坑4:环境变量</h3><p>设定完了shell executable还不行，还需要将git的shell相关环境变量再设置一遍（即使在Windows中已经设定好）：</p>
+<p><img src="/media/Windows%E9%85%8D%E7%BD%AEJenkins%E7%9A%84%E5%9D%913-1.png" alt="Windows配置Jenkins的坑3"></p>
+<p>顺便还有Android Home环境变量，不然后面打包apk会有问题。</p>
+<p>EOF</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;记录一些在Windows上搭建Jenkins服务的坑。&lt;/p&gt;
+&lt;p&gt;首先，选择的是Jenkins的windows安装包版本，这个版本无需自己再搭建tomcat服务器。&lt;/p&gt;
+&lt;h3 id=&quot;坑1：不要安装在默认路径&quot;&gt;&lt;a href=&quot;#坑1：不要安装在默认路径&quot; cl
+    
+    </summary>
+    
+      <category term="编程技术" scheme="http://channingsun.github.io/categories/%E7%BC%96%E7%A8%8B%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Jenkins" scheme="http://channingsun.github.io/tags/Jenkins/"/>
+    
+      <category term="Windows" scheme="http://channingsun.github.io/tags/Windows/"/>
     
   </entry>
   
