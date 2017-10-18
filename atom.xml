@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://channingsun.github.io/"/>
-  <updated>2017-10-17T10:13:19.811Z</updated>
+  <updated>2017-10-18T03:52:43.970Z</updated>
   <id>http://channingsun.github.io/</id>
   
   <author>
@@ -16,11 +16,54 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Docker读书笔记1</title>
-    <link href="http://channingsun.github.io/2017/10/17/20171017_Docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01/"/>
-    <id>http://channingsun.github.io/2017/10/17/20171017_Docker学习笔记1/</id>
+    <title>Docker读书笔记2——使用镜像</title>
+    <link href="http://channingsun.github.io/2017/10/17/20171017_Docker%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B02%E2%80%94%E2%80%94%E4%BD%BF%E7%94%A8%E9%95%9C%E5%83%8F/"/>
+    <id>http://channingsun.github.io/2017/10/17/20171017_Docker读书笔记2——使用镜像/</id>
     <published>2017-10-16T16:00:00.000Z</published>
-    <updated>2017-10-17T10:13:19.811Z</updated>
+    <updated>2017-10-18T03:52:43.970Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="拉取镜像："><a href="#拉取镜像：" class="headerlink" title="拉取镜像："></a>拉取镜像：</h3><figure class="highlight accesslog"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker pull <span class="string">[选项]</span> <span class="string">[Docker Registry地址]</span>&lt;仓库名&gt;:&lt;标签&gt;</div></pre></td></tr></table></figure>
+<p>如：</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">docker</span> pull ubuntu:<span class="number">14</span>.<span class="number">04</span> <span class="comment">#从默认仓库拉取Ubuntu</span></div></pre></td></tr></table></figure>
+<h3 id="启动容器："><a href="#启动容器：" class="headerlink" title="启动容器："></a>启动容器：</h3><figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker <span class="built_in">run</span> -<span class="keyword">it</span> <span class="comment">--rm ubuntu:14.04 bash</span></div></pre></td></tr></table></figure>
+<p>-it：这是两个参数，-i：交互式操作，-t 终端。</p>
+<p>–rm：容器退出后随之将其删除。默认情况下退出的容器并不会立即删除，除非手动 docker rm。</p>
+<p>ubuntu:14.04：用 ubuntu:14.04 镜像为基础来启动容器。</p>
+<p>bash：放在镜像名后的是命令，指定 Shell 是 bash。</p>
+<h3 id="列出镜像"><a href="#列出镜像" class="headerlink" title="列出镜像"></a>列出镜像</h3><p>基础命令：</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">docker images</span></div></pre></td></tr></table></figure>
+<p>虚悬镜像：无标签镜像，可删除：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">docker images <span class="_">-f</span> dangling=<span class="literal">true</span> <span class="comment">#查看</span></div><div class="line">docker rmi $(docker images -q <span class="_">-f</span> dangling=<span class="literal">true</span>) <span class="comment">#删除</span></div></pre></td></tr></table></figure>
+<p>其他命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">docker images <span class="_">-a</span>    <span class="comment">#显示所有中间层镜像（类似maven依赖）</span></div><div class="line">docker images ubuntu    <span class="comment">#根据仓库名列出镜像</span></div><div class="line">docker images ubuntu:16.04    <span class="comment">#列出特定的某个镜像</span></div><div class="line">...     <span class="comment">#更多其他过滤条件用到再查</span></div></pre></td></tr></table></figure>
+<h3 id="commit镜像"><a href="#commit镜像" class="headerlink" title="commit镜像"></a>commit镜像</h3><p>前期准备：</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">docker <span class="keyword">run</span><span class="bash"> --name webserver <span class="_">-d</span> -p 80:80 nginx   <span class="comment">#启动一个nginx容器</span></span></div><div class="line">docker exec -it webserver bash  <span class="comment">#通过终端方式进入容器</span></div><div class="line">...     <span class="comment">#进行一些操作</span></div><div class="line">docker diff webserver   <span class="comment">#查看具体改动（类似git diff）</span></div></pre></td></tr></table></figure>
+<p>保存修改：</p>
+<figure class="highlight fsharp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker commit [选项] &lt;容器ID或容器名&gt; <span class="meta">[&lt;仓库名&gt;[:&lt;标签&gt;]</span>]</div></pre></td></tr></table></figure>
+<p>类似git commit，会将上面的改动保存到镜像。下次再运行此镜像，会显示改动后的内容。</p>
+<p><strong>commit一般只用来保存临时现场，真正制作镜像使用Dockerfile命令</strong></p>
+<p>EOF</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;拉取镜像：&quot;&gt;&lt;a href=&quot;#拉取镜像：&quot; class=&quot;headerlink&quot; title=&quot;拉取镜像：&quot;&gt;&lt;/a&gt;拉取镜像：&lt;/h3&gt;&lt;figure class=&quot;highlight accesslog&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gut
+    
+    </summary>
+    
+      <category term="编程技术" scheme="http://channingsun.github.io/categories/%E7%BC%96%E7%A8%8B%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Docker" scheme="http://channingsun.github.io/tags/Docker/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Docker读书笔记1——简介</title>
+    <link href="http://channingsun.github.io/2017/10/17/20171017_Docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01%E2%80%94%E2%80%94%E7%AE%80%E4%BB%8B/"/>
+    <id>http://channingsun.github.io/2017/10/17/20171017_Docker学习笔记1——简介/</id>
+    <published>2017-10-16T16:00:00.000Z</published>
+    <updated>2017-10-18T03:46:53.202Z</updated>
     
     <content type="html"><![CDATA[<p>读书连接：<a href="https://yeasy.gitbooks.io/docker_practice/" target="_blank" rel="external">https://yeasy.gitbooks.io/docker_practice/</a></p>
 <h2 id="Docker简介"><a href="#Docker简介" class="headerlink" title="Docker简介"></a>Docker简介</h2><p>Docker 使用 Google 公司推出的 Go 语言 进行开发实现，基于 Linux 内核的 cgroup，namespace，以及 AUFS 类的 Union FS 等技术，对进程进行封装隔离，属于 操作系统层面的虚拟化技术。</p>
@@ -37,6 +80,8 @@
 <p>类似Maven仓库以及其中打好的jar包。可以直接用别人提供的仓库，也可以自己搭建。</p>
 <h2 id="下载安装"><a href="#下载安装" class="headerlink" title="下载安装"></a>下载安装</h2><p>直接去官网下载对应版本的安装包即可。或者通过apt-get、brew等版本管理工具获取。</p>
 <p>安装完成后，terminal中即可使用docker系列命令。</p>
+<h2 id="启动容器"><a href="#启动容器" class="headerlink" title="启动容器"></a>启动容器</h2><p>在系统图形界面打开Docker的App之后，才可以使用Docker后续功能。</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">docker --version    <span class="comment">#查看版本</span></div><div class="line">docker <span class="keyword">run</span><span class="bash"> <span class="_">-d</span> -p 80:80 --name webserver nginx   <span class="comment">#运行一个nginx服务器的容器做测试（此时可以浏览器打开localhost的80端口测试）</span></span></div><div class="line">docker stop webserver   <span class="comment">#停止容器</span></div><div class="line">docker rm webserver <span class="comment">#删除容器</span></div></pre></td></tr></table></figure>
 <p>EOF</p>
 ]]></content>
     
